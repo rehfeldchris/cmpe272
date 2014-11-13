@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap >
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet"-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+	<!-- own css -->
+    <link rel="stylesheet" type="text/css" href="style.css" >
+	
+	<!-- load the goole maps api-->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      function initialize() {
+        var mapCanvas = document.getElementById('map_canvas');
+        var mapOptions = {
+          center: new google.maps.LatLng(44.5403, -78.5463),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions)
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Tracker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse"/>
+      </div>
+    </nav>
+  
+	<!-- jumbotron header -->
+	<div class="jumbotron">
+	  <div class="container">
+		<h1>Tracker Tool <small>for emergencies</small></h1>
+		<p>This tool identifies the potentially infected person and back tracks the 
+		route he took and those who he had contact withs</p>
+	  </div>
+	</div>
+	
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Variable inputs</h2>
+          <p>The following options are available:</p>	
+		  
+			<div class="container">
+			  <form class="form-signin" role="form" action="process.php" method="post">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">UserID</span>
+					<input type="text" class="form-control" placeholder="UserID" name="userid" required autofocus>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">Degree of freedom</span>
+					<input type="dof" class="form-control" placeholder="3 people" name="dof" required>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">Distance</span>
+					<input type="dof" class="form-control" placeholder="1 feet" name="distance" required>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">Time in Contact</span>
+					<input type="dof" class="form-control" placeholder="3 or more seconds" name="time" required>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">Days to Track</span>
+					<input type="dof" class="form-control" placeholder="2 days" name="2days" required>
+				</div>
+					
+				<div class="checkbox">
+				  <label>
+					<input type="checkbox" value="remember-search"> Remember search
+				  </label>
+				</div>
+				<p><a class="btn btn-default" href="#" role="button" type="submit">Submit &raquo;</a></p>
+			  </form>
+			</div> <!-- /container -->
+          <!--p><a class="btn btn-default" href="#" role="button" type="submit">Submit &raquo;</a></p>
+          <p><a class="btn btn-default" href="#" role="button" type="reset">Clear &raquo;</a></p-->
+        </div>
+	  </div>
+	</div>
+	
+	<hr>
+	<br>
+			  
+	<div id="map_canvas"></div>
+	
+	<br>
+	<hr>
+	
+	<footer>
+	  <p> &copy; CMPE272 Group 33: Amy Chou, Carita Ou, Chris Rehfeld, Liping</p>
+	</footer>
+	
+	
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed>
+    <script src="dist/js/bootstrap.min.js"></script -->
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
