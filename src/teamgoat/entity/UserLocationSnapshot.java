@@ -1,7 +1,5 @@
 package teamgoat.entity;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
 
 /**
