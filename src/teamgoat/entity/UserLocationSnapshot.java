@@ -3,21 +3,17 @@ package teamgoat.entity;
 import java.util.Date;
 
 /**
- * contains info about a users location at some specific instant in time.
+ * contains info about a users location at some instant in time.
  * 
  * @author chrehfel
  */
 public class UserLocationSnapshot {
 	private User user;
-	private double lat;
-	private double lng;
-	private Date timestamp;
+	private TemporalLocation temporalLocation;
 	
-	public UserLocationSnapshot(User user, double lat, double lng, Date timestamp) {
+	public UserLocationSnapshot(User user, TemporalLocation temporalLocation) {
 		this.user = user;
-		this.lat = lat;
-		this.lng = lng;
-		this.timestamp = timestamp;
+		this.temporalLocation = temporalLocation;
 	}
 	
 	public User getUser() {
@@ -25,14 +21,18 @@ public class UserLocationSnapshot {
 	}
 	
 	public double getLat() {
-		return lat;
+		return temporalLocation.getLat();
 	}
 	
 	public double getLng() {
-		return lng;
+		return temporalLocation.getLng();
 	}
 	
 	public Date getTimestamp() {
-		return timestamp;
+		return temporalLocation.getTimestamp();
+	}
+
+	public TemporalLocation getTemporalLocation() {
+		return temporalLocation;
 	}
 }

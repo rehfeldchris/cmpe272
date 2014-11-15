@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import teamgoat.entity.InfectedUserLocationSnapshot;
+import teamgoat.entity.TemporalLocation;
 import teamgoat.entity.User;
 import teamgoat.entity.UserLocationSnapshot;
 
@@ -103,11 +105,14 @@ public class JobProcessor extends HttpServlet {
 		double lat = 37.7833 + rand.nextDouble();
 		double lng = 122.4167 + rand.nextDouble();
 		for (int i = 0; i < 5; i++) {
-			records.add(new UserLocationSnapshot(
-					user, 
-					lat + rand.nextDouble(), 
-					lng + rand.nextDouble(), 
-					makeDate(i)
+			records.add(new InfectedUserLocationSnapshot(
+					user,
+					new TemporalLocation(
+						lat + rand.nextDouble(), 
+						lng + rand.nextDouble(), 
+						makeDate(i)
+					),
+					null
 			));
 		}
 		return records;
