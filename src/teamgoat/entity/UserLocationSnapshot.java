@@ -2,6 +2,8 @@ package teamgoat.entity;
 
 import java.util.Date;
 
+import org.joda.time.DateTime;
+
 /**
  * contains info about a users location at some instant in time.
  * 
@@ -28,7 +30,7 @@ public class UserLocationSnapshot {
 		return temporalLocation.getLng();
 	}
 	
-	public Date getTimestamp() {
+	public DateTime getTimestamp() {
 		return temporalLocation.getTimestamp();
 	}
 

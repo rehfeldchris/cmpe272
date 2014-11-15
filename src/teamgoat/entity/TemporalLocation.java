@@ -1,6 +1,6 @@
 package teamgoat.entity;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  * describes a location at some instant in time.
@@ -10,9 +10,9 @@ import java.util.Date;
 public class TemporalLocation {
 	private double lat;
 	private double lng;
-	private Date timestamp;
+	private DateTime timestamp;
 	
-	public TemporalLocation(double lat, double lng, Date timestamp) {
+	public TemporalLocation(double lat, double lng, DateTime timestamp) {
 		this.lat = lat;
 		this.lng = lng;
 		this.timestamp = timestamp;
@@ -26,7 +26,7 @@ public class TemporalLocation {
 		return lng;
 	}
 	
-	public Date getTimestamp() {
+	public DateTime getTimestamp() {
 		return timestamp;
 	}
 }

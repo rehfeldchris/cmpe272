@@ -7,30 +7,38 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.MutableDateTime;
+
 import teamgoat.entity.InfectedUserLocationSnapshot;
 import teamgoat.entity.TemporalLocation;
 import teamgoat.entity.User;
 import teamgoat.entity.UserLocationSnapshot;
 
 public class InfectionGraphGenerator {
-	private GregorianCalendar time = new GregorianCalendar();
+	private MutableDateTime currentTime;
+	private DateTime endTime;
+	private Duration tickDuration = Duration.standardSeconds(5);
 	private Set<User> infectedUserSet = new HashSet<>();
 	private List<InfectedUserLocationSnapshot> infectedUsers = new ArrayList<>();
 	private int maxHopsToFollow = 0;
 	private int maxResultSize = 0;
-	private double minimumRangeInMeters = 0;
+	private double maximumInfectionRangeInMeters = 0;
 	
 	private List<UserLocationSnapshot> findAllWithinRange(TemporalLocation temporalLocation) {
 		List<UserLocationSnapshot> userLocationSnapshotsWithinRange = new ArrayList<>();
 		return userLocationSnapshotsWithinRange;
 	}
 	
-	public List<InfectedUserLocationSnapshot> getInfectionGraph(InfectedUserLocationSnapshot origionalInfectedUser, int maxHopsToFollow, int maxResultSize, double minimumRangeInMeters) {
-		time.setTime(origionalInfectedUser.getTimestamp());
+	public List<InfectedUserLocationSnapshot> getInfectionGraph(InfectedUserLocationSnapshot origionalInfectedUser, int maxHopsToFollow, int maxResultSize, double maximumInfectionRangeInMeters, Duration maxDurationOfInfectionSpreading) {
+		currentTime = new MutableDateTime(origionalInfectedUser.getTimestamp());
+		endTime = new DateTime(currentTime).withDurationAdded(maxDurationOfInfectionSpreading, 1);
 		this.infectedUserSet = new HashSet<>();
 		this.maxHopsToFollow = maxHopsToFollow;
 		this.maxResultSize = maxResultSize;
-		this.minimumRangeInMeters = minimumRangeInMeters;
+		this.maximumInfectionRangeInMeters = maximumInfectionRangeInMeters;
+		
 		List<InfectedUserLocationSnapshot> users = new ArrayList<>();
 		users.addAll(getUsersInfectedBy(origionalInfectedUser));
 		
@@ -63,6 +71,6 @@ public class InfectionGraphGenerator {
 	}
 	
 	private void advanceTimeToNextTick() {
-		time.set(Calendar.MINUTE, time.get(Calendar.MINUTE) + 5);
+		currentTime.add(tickDuration, 1);
 	}
 }

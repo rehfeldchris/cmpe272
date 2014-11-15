@@ -16,6 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -118,17 +123,14 @@ public class JobProcessor extends HttpServlet {
 		return records;
 	}
 	
-	private Date makeDate(int minutesToAdd) {
-		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss", Locale.ENGLISH);
-		try {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(dateParser.parse("2014-11-12 12:33:44"));
-			cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + minutesToAdd);
-			return cal.getTime();
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return null;
-		}
+	private DateTime makeDate(int minutesToAdd) {
+		return DateTimeFormat
+				.forPattern("yyyy-MM-DD HH:mm:ss")
+				.parseDateTime("2014-11-12 12:33:44")
+				.withDurationAdded(
+					Duration.standardMinutes(1), 
+					minutesToAdd
+				);
 	}
 	
 	private Gson getGson() {
