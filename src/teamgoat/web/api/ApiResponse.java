@@ -2,7 +2,7 @@ package teamgoat.web.api;
 
 import java.util.List;
 
-import teamgoat.entity.UserLocationSnapshot;
+import teamgoat.entity.InfectedUserLocationSnapshot;
 
 /**
  * defines the structure we use to deliver json to the client.
@@ -10,13 +10,13 @@ import teamgoat.entity.UserLocationSnapshot;
  * @author chrehfel
  */
 public class ApiResponse {
-	private List<UserLocationSnapshot> userLocationSnapshots;
+	private List<InfectedUserLocationSnapshot> userLocationSnapshots;
 
-	public ApiResponse(List<UserLocationSnapshot> userLocationSnapshots) {
+	public ApiResponse(List<InfectedUserLocationSnapshot> userLocationSnapshots) {
 		this.userLocationSnapshots = userLocationSnapshots;
 	}
 
-	public List<UserLocationSnapshot> getUserLocationSnapshots() {
+	public List<InfectedUserLocationSnapshot> getUserLocationSnapshots() {
 		return userLocationSnapshots;
 	}
 }

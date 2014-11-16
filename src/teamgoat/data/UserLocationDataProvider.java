@@ -11,4 +11,5 @@ import teamgoat.entity.UserLocationSnapshot;
 public interface UserLocationDataProvider {
 	public List<UserLocationSnapshot> getUsersWithinRange(TemporalLocation temporalLocation, double maxRangeInMeters) throws DataAccessException;
 	public UserLocationSnapshot getLocation(User user, DateTime instant) throws DataAccessException;
+	public User getUser(int userId) throws DataAccessException;
 }

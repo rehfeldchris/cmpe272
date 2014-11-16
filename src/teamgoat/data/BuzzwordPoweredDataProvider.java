@@ -1,6 +1,5 @@
 package teamgoat.data;
 
-import java.sql.Statement;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -16,6 +15,11 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 	}
 
 	public UserLocationSnapshot getLocation(User user, DateTime instant) throws DataAccessException {
+		return null;
+	}
+
+
+	public User getUser(int userId) throws DataAccessException {
 		return null;
 	}
 

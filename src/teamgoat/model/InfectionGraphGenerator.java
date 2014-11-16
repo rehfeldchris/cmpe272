@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.MutableDateTime;
 
+import teamgoat.data.BuzzwordPoweredDataProvider;
 import teamgoat.data.UserLocationDataProvider;
 import teamgoat.entity.InfectedUserLocationSnapshot;
 import teamgoat.entity.User;
@@ -24,9 +25,8 @@ public class InfectionGraphGenerator {
 	private double maximumInfectionRangeInMeters = 0;
 	ContagionDeterminer contagionDeterminer;
 	
-	public InfectionGraphGenerator(UserLocationDataProvider dataProvider, MutableDateTime currentTime, Duration maxDurationOfInfectionSpreading, int maxResultSize, double maximumInfectionRangeInMeters, ContagionDeterminer contagionDeterminer) {
+	public InfectionGraphGenerator(UserLocationDataProvider dataProvider, Duration maxDurationOfInfectionSpreading, int maxResultSize, double maximumInfectionRangeInMeters, ContagionDeterminer contagionDeterminer) {
 		this.dataProvider = dataProvider;
-		this.currentTime = currentTime;
 		endTime = new DateTime(currentTime).withDurationAdded(maxDurationOfInfectionSpreading, 1);
 		this.maxResultSize = maxResultSize;
 		this.maximumInfectionRangeInMeters = maximumInfectionRangeInMeters;
@@ -104,4 +104,6 @@ public class InfectionGraphGenerator {
 	private void advanceTimeToNextTick() {
 		currentTime.add(tickDuration, 1);
 	}
+	
+
 }

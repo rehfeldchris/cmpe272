@@ -20,14 +20,20 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import teamgoat.data.BuzzwordPoweredDataProvider;
+import teamgoat.data.UserLocationDataProvider;
 import teamgoat.entity.InfectedUserLocationSnapshot;
 import teamgoat.entity.TemporalLocation;
 import teamgoat.entity.User;
 import teamgoat.entity.UserLocationSnapshot;
+import teamgoat.model.IncubationPeriodAndMaxHopsContagionDeterminer;
+import teamgoat.model.InfectionGraphGenerator;
 
 @WebServlet(name = "JobProcessor", urlPatterns = { "/JobProcessor" })
 public class JobProcessor extends HttpServlet {
@@ -38,25 +44,38 @@ public class JobProcessor extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String json = getGson().toJson(new ApiResponse(getMockData()));
+		Integer originalInfectedUserId = getParamAsInt(request, "originalInfectedUserId");
+		Integer maxNodeHopsFromOrigin = getParamAsInt(request, "maxNodeHopsFromOrigin");
+		Integer maxResultSize = getParamAsInt(request, "maxResultSize");
+		Double maximumInfectionRangeInMeters = getParamAsDouble(request, "minInfectionRangeYards");
+		Duration maxTimeOfInfectionSpreading = getDuration(request.getParameter("maxTimeOfInfectionSpreading"));
+		Duration incubationTime = getDuration(request.getParameter("incubationTime"));
+		
+		
+		UserLocationDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		User user = dataProvider.getUser(originalInfectedUserId);
+		UserLocationSnapshot infectionStartPoint = dataProvider.getLocation(user, getDateTime("startTime"));
+		
+		List<InfectedUserLocationSnapshot> results = getResults(infectionStartPoint, maxTimeOfInfectionSpreading, incubationTime, maxNodeHopsFromOrigin, maxResultSize, maximumInfectionRangeInMeters);
+		
+		String json = getGson().toJson(new ApiResponse(results));
 		response.setContentType("application/javascript");
 		response.getWriter().write(json);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String originalInfectedUserId = request.getParameter("originalInfectedUserId");
-		Integer maxNodeHopsFromOrigin = getParamAsInt(request, "maxNodeHopsFromOrigin");
-		Integer minInfectionMinutes = getParamAsInt(request, "minInfectionMinutes");
-		Integer minInfectionRangeYards = getParamAsInt(request, "minInfectionRangeYards");
-		
-		try {
-			maxNodeHopsFromOrigin = Integer.parseInt(request.getParameter("maxNodeDistanceFromOrigin"));
-		} catch (NumberFormatException e) {
-			
-		}
-		
+	
+	private Duration getDuration(String duration) {
+		PeriodFormatter hoursMinutes = new PeriodFormatterBuilder()
+	     .appendHours()
+	     .appendSeparator(":")
+	     .appendMinutes()
+	     .toFormatter();
+		return hoursMinutes.parsePeriod(duration).toStandardDuration();
 	}
 	
+	private DateTime getDateTime(String isoDateString) {
+		return DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z").parseDateTime(isoDateString);
+	}
+
 	private Integer getParamAsInt(HttpServletRequest request, String requestParameterName) {
 		try {
 			return Integer.parseInt(request.getParameter(requestParameterName));
@@ -73,30 +92,12 @@ public class JobProcessor extends HttpServlet {
 		}
 	}
 	
-	private int getInfectedUserId(HttpServletRequest request) {
-		// Try to parse the input as an integer first
-		Integer userId = getParamAsInt(request, "originalInfectedUser");
-		if (userId != null) {
-			return userId;
-		}
-		
-		// If it failed, they probably entered a persons name, so we try to translate that to an id.
-		String name = request.getParameter("originalInfectedUser");
-		return findUserIdByName(name);
-	}
-	
-	private Integer findUserIdByName(String name)
-	{
-		// todo
-		return null;
-	}
-	
-	private List<UserLocationSnapshot> getMockData() {
+	private List<InfectedUserLocationSnapshot> getMockData() {
 		User chris = new User("Chris", 1);
 		User carita = new User("Carita", 2);
 		User amy = new User("Amy", 3);
 		User thong = new User("Thong", 4);
-		List<UserLocationSnapshot> records = new ArrayList<>();
+		List<InfectedUserLocationSnapshot> records = new ArrayList<>();
 		records.addAll(mockRecordsForUser(chris));
 		records.addAll(mockRecordsForUser(carita));
 		records.addAll(mockRecordsForUser(amy));
@@ -104,8 +105,8 @@ public class JobProcessor extends HttpServlet {
 		return records;
 	}
 	
-	private List<UserLocationSnapshot> mockRecordsForUser(User user) {
-		List<UserLocationSnapshot> records = new ArrayList<>();
+	private List<InfectedUserLocationSnapshot> mockRecordsForUser(User user) {
+		List<InfectedUserLocationSnapshot> records = new ArrayList<>();
 		Random rand = new Random();
 		double lat = 37.7833 + rand.nextDouble();
 		double lng = 122.4167 + rand.nextDouble();
@@ -135,9 +136,27 @@ public class JobProcessor extends HttpServlet {
 	
 	private Gson getGson() {
 		return new GsonBuilder()
-		.setDateFormat("yyyy-MM-dd'T'HH:mm:ssX") // use ISO 8601 format for serializing dates because js supports it well.
-		.setPrettyPrinting() 
-		.create();
+			.setDateFormat("yyyy-MM-dd'T'HH:mm:ssX") // use ISO 8601 format for serializing dates because js supports it well.
+			.setPrettyPrinting() 
+			.create();
+	}
+	
+	private List<InfectedUserLocationSnapshot> getResults(UserLocationSnapshot origionalInfectedUser, Duration maxTimeOfInfectionSpreading, Duration incubationTime, int maxContagionHopsFromOrigin, int maxResultSize, double maximumInfectionRangeInMeters) {
+		UserLocationDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		
+		InfectionGraphGenerator generator = new InfectionGraphGenerator(
+			dataProvider, 
+			maxTimeOfInfectionSpreading, 
+			maxResultSize, 
+			maximumInfectionRangeInMeters, 
+			new IncubationPeriodAndMaxHopsContagionDeterminer(incubationTime, maxContagionHopsFromOrigin)
+		);
+		
+		return generator.getInfectionGraph(new InfectedUserLocationSnapshot(
+			origionalInfectedUser.getUser(), 
+			origionalInfectedUser.getTemporalLocation(), 
+			null
+		));
 	}
 
 }
