@@ -35,4 +35,8 @@ public class UserLocationSnapshot {
 	public TemporalLocation getTemporalLocation() {
 		return temporalLocation;
 	}
+
+	public String toString() {
+		return "UserLocationSnapshot [user=" + user + ", temporalLocation="	+ temporalLocation + "]";
+	}
 }

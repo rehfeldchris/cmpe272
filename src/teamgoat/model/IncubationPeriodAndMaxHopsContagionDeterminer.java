@@ -16,7 +16,7 @@ public class IncubationPeriodAndMaxHopsContagionDeterminer implements ContagionD
 
 	public boolean isContagious(InfectedUserLocationSnapshot infectedUser, DateTime currentTime) {
 		return infectedUser.distanceInHopsFromOrigin() < maxHopsFromOrigionInfection
-			&& infectedUser.getTimestamp().isAfter(currentTime.withDurationAdded(incubationPeriod, -1))
+			&& infectedUser.getTimestamp().withDurationAdded(incubationPeriod, 1).isBefore(currentTime)
 		;
 	}
 }

@@ -12,6 +12,7 @@ import org.joda.time.MutableDateTime;
 import teamgoat.data.BuzzwordPoweredDataProvider;
 import teamgoat.data.UserLocationDataProvider;
 import teamgoat.entity.InfectedUserLocationSnapshot;
+import teamgoat.entity.TemporalLocation;
 import teamgoat.entity.User;
 import teamgoat.entity.UserLocationSnapshot;
 
@@ -35,9 +36,13 @@ public class InfectionGraphGenerator {
 
 	private List<UserLocationSnapshot> findAllCurrentlyWithinRangeOfUser(User user) {
 		UserLocationSnapshot currentLocation = getCurrentLocation(user);
-
-		List<UserLocationSnapshot> userLocationSnapshotsWithinRange = new ArrayList<>();
-		return userLocationSnapshotsWithinRange;
+		List<UserLocationSnapshot> usersWithinRange = dataProvider.getUsersWithinRange(
+			currentLocation.getTemporalLocation(), 
+			maximumInfectionRangeInMeters
+		);
+		
+		System.out.printf("found %d records within range of an infected user at %s\n", usersWithinRange.size(), currentTime);	
+		return usersWithinRange;
 	}
 	
 	private UserLocationSnapshot getCurrentLocation(User user) {
@@ -46,6 +51,7 @@ public class InfectionGraphGenerator {
 	
 	public List<InfectedUserLocationSnapshot> getInfectionGraph(InfectedUserLocationSnapshot origionalInfectedUser) {
 		currentTime = new MutableDateTime(origionalInfectedUser.getTimestamp());
+		infectedUsers.put(origionalInfectedUser.getUser(), origionalInfectedUser);
 		
 		List<InfectedUserLocationSnapshot> users = new ArrayList<>();
 		while (shouldContinueInfectingMoreUsers()) {
@@ -54,7 +60,7 @@ public class InfectionGraphGenerator {
 			// We make a copy of the list so that we can add more to it while iterating it.
 			for (User contagiousUser : getAllUsersWhoCanInfectOthers()) {
 				for (InfectedUserLocationSnapshot newlyInfectedUserSnapshot : getUsersInfectedBy(contagiousUser)) {
-					infectedUsers.put(newlyInfectedUserSnapshot.getUser(), newlyInfectedUserSnapshot);
+					recordInfectedUser(newlyInfectedUserSnapshot);
 				}
 			}
 			
@@ -64,10 +70,15 @@ public class InfectionGraphGenerator {
 		return users;
 	}
 	
+	private void recordInfectedUser(InfectedUserLocationSnapshot newlyInfectedUserSnapshot) {
+		System.out.println(newlyInfectedUserSnapshot);
+		infectedUsers.put(newlyInfectedUserSnapshot.getUser(), newlyInfectedUserSnapshot);
+	}
+	
 	private List<InfectedUserLocationSnapshot> getUsersInfectedBy(User infectedUser) {
 		List<InfectedUserLocationSnapshot> newlyInfectedusers = new ArrayList<>();
 		for (UserLocationSnapshot snapshot : findAllCurrentlyWithinRangeOfUser(infectedUser)) {
-			if (!infectedUsers.containsKey(snapshot.getUser())) {
+			if (!infectedUser.equals(snapshot.getUser()) && !infectedUsers.containsKey(snapshot.getUser())) {
 				newlyInfectedusers.add(new InfectedUserLocationSnapshot(
 					snapshot.getUser(), 
 					snapshot.getTemporalLocation(), 
@@ -104,6 +115,7 @@ public class InfectionGraphGenerator {
 	private void advanceTimeToNextTick() {
 		currentTime.add(tickDuration, 1);
 	}
+	
 	
 
 }

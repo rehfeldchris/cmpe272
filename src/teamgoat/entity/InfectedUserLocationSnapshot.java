@@ -27,4 +27,8 @@ public class InfectedUserLocationSnapshot extends UserLocationSnapshot {
 		}
 		return hops;
 	}
+
+	public String toString() {
+		return "InfectedUserLocationSnapshot [infectingUser=" + infectingUser+ ", toString()=" + super.toString() + "]";
+	}
 }

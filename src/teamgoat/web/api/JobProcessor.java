@@ -54,7 +54,7 @@ public class JobProcessor extends HttpServlet {
 		
 		UserLocationDataProvider dataProvider = new BuzzwordPoweredDataProvider();
 		User user = dataProvider.getUser(originalInfectedUserId);
-		UserLocationSnapshot infectionStartPoint = dataProvider.getLocation(user, getDateTime("startTime"));
+		UserLocationSnapshot infectionStartPoint = dataProvider.getLocation(user, getDateTime(request, "startTime"));
 		
 		List<InfectedUserLocationSnapshot> results = getResults(infectionStartPoint, maxTimeOfInfectionSpreading, incubationTime, maxNodeHopsFromOrigin, maxResultSize, maximumInfectionRangeInMeters);
 		
@@ -72,8 +72,8 @@ public class JobProcessor extends HttpServlet {
 		return hoursMinutes.parsePeriod(duration).toStandardDuration();
 	}
 	
-	private DateTime getDateTime(String isoDateString) {
-		return DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss'Z").parseDateTime(isoDateString);
+	private DateTime getDateTime(HttpServletRequest request, String isoDateString) {
+		return DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss").parseDateTime(request.getParameter(isoDateString));
 	}
 
 	private Integer getParamAsInt(HttpServletRequest request, String requestParameterName) {

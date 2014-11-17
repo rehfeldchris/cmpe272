@@ -29,4 +29,9 @@ public class TemporalLocation {
 	public DateTime getTimestamp() {
 		return timestamp;
 	}
+
+	public String toString() {
+		return "TemporalLocation [lat=" + lat + ", lng=" + lng + ", timestamp="+ timestamp + "]";
+	}
+	
 }
