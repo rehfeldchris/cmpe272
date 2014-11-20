@@ -23,10 +23,10 @@ function initialize() {
         var marker = new google.maps.Marker({
             map: map,
             title: "Hello World!",
-            draggable: true,
+            //draggable: true,
             animation: google.maps.Animation.DROP,
-            position: lineCoordinates[i],
-            icon: 'http://www.operationlettertosanta.com/Christmas%20images/logos/VistaICO_Christmas/PNG/Santa-Claus.png'
+            position: lineCoordinates[i]//,
+            //icon: 'http://www.operationlettertosanta.com/Christmas%20images/logos/VistaICO_Christmas/PNG/Santa-Claus.png'
         });
     };
     google.maps.event.addListener(marker, 'click', function() {
