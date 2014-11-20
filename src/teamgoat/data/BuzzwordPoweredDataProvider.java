@@ -93,7 +93,7 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 			Duration moment = Duration.standardSeconds(2);
 			DateTime instant = temporalLocation.getTimestamp();
 			double rangeFactor = 0.001;
-			double boundingBoxPlusMinus = maxRangeInMeters;
+			double boundingBoxPlusMinus = maxRangeInMeters * rangeFactor;
 			
 			Object[] sqlArgs = new Object[]{
 	    		formatForSql(instant.withDurationAdded(moment, -1)),
@@ -103,6 +103,8 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 				temporalLocation.getLng() - boundingBoxPlusMinus, 
 				temporalLocation.getLng() + boundingBoxPlusMinus, 
 			};
+			
+			//System.out.printf("running sql: %s\n", getInterpolatedSql(findUsersWithinRangeSql, sqlArgs));
 
 		    List<Map<String, Object>> rows = runner.query(
 	    		getConnection(), 
@@ -140,6 +142,14 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 
 		return null;
 	}
+	
+	private String getInterpolatedSql(String sql, Object[] args)
+	{
+		for (Object arg : args) {
+			sql = sql.replaceFirst("\\?", arg.toString());
+		}
+		return sql;
+	}
 
 
 	public User getUser(int userId) throws DataAccessException {
@@ -157,6 +167,25 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 		}
 
 		return null;
+	}
+	
+	public int getUsersTest() throws DataAccessException {
+		QueryRunner runner = new QueryRunner();
+		try {
+		    String sql = "select * from bigsql.usertrajectorydata where userid between 100 and 77770 fetch first 100 rows only";
+		    List<Map<String, Object>> rows = runner.query(getConnection(), sql, new MapListHandler());
+		    // Check for existence....
+		    if (rows != null) {
+		    	
+		    }
+		    
+		    return rows.size();
+		    
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return 0;
 	}
 	
 	private UserLocationSnapshot toUserLocationSnapshot(Map<String, Object> dbRow) {

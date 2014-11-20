@@ -52,7 +52,9 @@ public class JobProcessor extends HttpServlet {
 		Duration incubationTime = getDuration(request.getParameter("incubationTime"));
 		
 		
-		UserLocationDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		BuzzwordPoweredDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		
+		System.out.println(dataProvider.getUsersTest());
 		User user = dataProvider.getUser(originalInfectedUserId);
 		UserLocationSnapshot infectionStartPoint = dataProvider.getLocation(user, getDateTime(request, "startTime"));
 		
