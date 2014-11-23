@@ -227,29 +227,23 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 	public List<UserLocationSnapshot> getUsersWithinTimeRange(DateTime dateTime) throws DataAccessException {
 		QueryRunner runner = new QueryRunner();
 		try {
-			Duration moment = Duration.standardSeconds(120);
+			Duration moment = Duration.standardSeconds(1200);
 			DateTime instant = dateTime;
 			
 			Object[] sqlArgs = new Object[]{
 	    		formatForSql(instant.withDurationAdded(moment, -1)),
 	    		formatForSql(instant.withDurationAdded(moment, 1)),
-	    		formatForSql(instant.withDurationAdded(moment, -1)),
-	    		formatForSql(instant.withDurationAdded(moment, 1)),
 			};
-			
-			//System.out.printf("running sql: %s\n", getInterpolatedSql(findUsersWithinRangeSql, sqlArgs));
+
 			String sqlStatement = "	  \r\n" + 
-					"select a.LATITUDE\r\n" + 
-					"     , a.LONGITUDE\r\n" + 
-					"	 , a.USERID\r\n" + 
-					"	 , a.TIME\r\n" + 
-					"FROM (select * FROM bigsql.usertrajectorydata\r\n" + 
-					"where TIME between TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
-					"and TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n) a\r\n" + 
-					"inner join (select USERID, MAX(TIME) MAXTIME from bigsql.usertrajectorydata\r\n" +
+					"select max(latitude) latitude\r\n" + 
+					"     , max(longitude) longitude\r\n" + 
+					"	 , max(time) time\r\n" + 
+					"	 , userid\r\n" + 
+					"FROM bigsql.usertrajectorydata\r\n" + 
 					"where TIME between TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
 					"and TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
-					"group by USERID) b on a.USERID=b.USERID and a.TIME=b.MAXTIME\r\n" +
+					"group by USERID\r\n" +
 					"";
 			
 			System.out.println(sqlStatement);
