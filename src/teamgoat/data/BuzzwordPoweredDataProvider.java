@@ -224,11 +224,11 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 	/*****************************************************
 	 * Used for PlotTest
 	 ****************************************************/
-	public List<UserLocationSnapshot> getUsersWithinTimeRange(DateTime dateTime) throws DataAccessException {
+	public List<UserLocationSnapshot> getUsersWithinTimeRange(DateTime dateTime, int seconds) throws DataAccessException {
 		QueryRunner runner = new QueryRunner();
 		try {
 
-			Duration moment = Duration.standardSeconds(120000);
+			Duration moment = Duration.standardSeconds(seconds);
 			DateTime instant = dateTime;
 			
 			Object[] sqlArgs = new Object[]{

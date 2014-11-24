@@ -15,10 +15,11 @@
 		    jQuery(document).on("click", ".button", function(e) {
 		        e.preventDefault();
 		        var dateTime = $("#text").val();          
-		        initialize(dateTime);
+		        var seconds = $("#seconds").val();
+		        initialize(dateTime, seconds);
 		    });
 
-		function initialize(dateTime) {
+		function initialize(dateTime, seconds) {
 	    	  var latlng = new google.maps.LatLng(40, 116);
 	    	  var mapOptions = {
 	    	    zoom: 9,
@@ -26,7 +27,7 @@
 	    	    mapTypeId: google.maps.MapTypeId.ROADMAP
 	    	  }
 	    	  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-	    	  getLocations(dateTime);
+	    	  getLocations(dateTime, seconds);
 	    }
     
 	    function moveToLocation(lat, lng){
@@ -35,9 +36,9 @@
 	        map.panTo(center);
 	    }
     
-		function getLocations(dateTime) {
+		function getLocations(dateTime, seconds) {
 
-			$.getJSON("http://localhost:8080/plague/PlotTest?dateTime="+dateTime, function (data) {
+			$.getJSON("http://localhost:8080/plague/PlotTest?dateTime="+dateTime+"&seconds="+seconds, function (data) {
 
 				var location;
 
@@ -60,7 +61,8 @@
 	</script>
 </head>
 <body>
-    <input type="text" id="text" name="name" value="2008-11-15T10:13:36" />
+    date: <input type="text" id="text" name="name" value="2008-11-15T10:13:36" /> 
+    seconds: <input type="text" id="seconds" name="name" value="12000" />
     <a href="#" class="button"><button>Enter</button></a>
     <div id="map-canvas"></div>
 </body>

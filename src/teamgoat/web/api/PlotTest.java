@@ -29,10 +29,11 @@ public class PlotTest extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DateTime dateTime = getDateTime(request, "dateTime");
+		int seconds = Integer.parseInt(request.getParameter("seconds"));
 		
 		BuzzwordPoweredDataProvider dataProvider = new BuzzwordPoweredDataProvider();
 		
-		List<UserLocationSnapshot> results = dataProvider.getUsersWithinTimeRange(dateTime);
+		List<UserLocationSnapshot> results = dataProvider.getUsersWithinTimeRange(dateTime, seconds);
 		
 		String json = getGson().toJson(new PlotTestResponse(results));
 		response.setContentType("application/javascript");
