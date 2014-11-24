@@ -1,6 +1,7 @@
 package teamgoat.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +25,12 @@ public class InfectionGraphGenerator {
 	private Map<User, InfectedUserLocationSnapshot> infectedUsers = new LinkedHashMap<>();
 	private int maxResultSize = 0;
 	private double maximumInfectionRangeInMeters = 0;
-	ContagionDeterminer contagionDeterminer;
+	private ContagionDeterminer contagionDeterminer;
+	private Duration maxDurationOfInfectionSpreading;
 	
 	public InfectionGraphGenerator(UserLocationDataProvider dataProvider, Duration maxDurationOfInfectionSpreading, int maxResultSize, double maximumInfectionRangeInMeters, ContagionDeterminer contagionDeterminer) {
 		this.dataProvider = dataProvider;
-		endTime = new DateTime(currentTime).withDurationAdded(maxDurationOfInfectionSpreading, 1);
+		this.maxDurationOfInfectionSpreading = maxDurationOfInfectionSpreading;
 		this.maxResultSize = maxResultSize;
 		this.maximumInfectionRangeInMeters = maximumInfectionRangeInMeters;
 		this.contagionDeterminer = contagionDeterminer;
@@ -36,6 +38,9 @@ public class InfectionGraphGenerator {
 
 	private List<UserLocationSnapshot> findAllCurrentlyWithinRangeOfUser(User user) {
 		UserLocationSnapshot currentLocation = getCurrentLocation(user);
+		if (currentLocation == null) {
+			return Collections.emptyList();
+		}
 		List<UserLocationSnapshot> usersWithinRange = dataProvider.getUsersWithinRange(
 			currentLocation.getTemporalLocation(), 
 			maximumInfectionRangeInMeters
@@ -51,6 +56,7 @@ public class InfectionGraphGenerator {
 	
 	public List<InfectedUserLocationSnapshot> getInfectionGraph(InfectedUserLocationSnapshot origionalInfectedUser) {
 		currentTime = new MutableDateTime(origionalInfectedUser.getTimestamp());
+		endTime = new DateTime(currentTime).withDurationAdded(this.maxDurationOfInfectionSpreading, 1);
 		infectedUsers.put(origionalInfectedUser.getUser(), origionalInfectedUser);
 		
 		List<InfectedUserLocationSnapshot> users = new ArrayList<>();
@@ -67,7 +73,7 @@ public class InfectionGraphGenerator {
 			advanceTimeToNextTick();
 		}
 
-		return users;
+		return new ArrayList<>(infectedUsers.values());
 	}
 	
 	private void recordInfectedUser(InfectedUserLocationSnapshot newlyInfectedUserSnapshot) {
@@ -115,7 +121,5 @@ public class InfectionGraphGenerator {
 	private void advanceTimeToNextTick() {
 		currentTime.add(tickDuration, 1);
 	}
-	
-	
 
 }

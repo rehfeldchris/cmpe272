@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        html { height: 100% }
+        body { height: 100%; margin: 0; padding: 0 }
+        #map-canvas { height: 100% }
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    </script>       
+    <script type="text/javascript">
+		jQuery(document).ready(function() {
+		    jQuery(document).on("click", ".button", function(e) {
+		        e.preventDefault();
+		        var dateTime = $("#text").val();          
+		        initialize(dateTime);
+		    });
+
+		function initialize(dateTime) {
+	    	  var latlng = new google.maps.LatLng(40, 116);
+	    	  var mapOptions = {
+	    	    zoom: 9,
+	    	    center: latlng,
+	    	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	    	  }
+	    	  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	    	  getLocations(dateTime);
+	    }
+    
+	    function moveToLocation(lat, lng){
+	        var center = new google.maps.LatLng(lat, lng);
+	        // using global variable:
+	        map.panTo(center);
+	    }
+    
+		function getLocations(dateTime) {
+
+			$.getJSON("http://localhost:8080/plague/PlotTest?dateTime="+dateTime, function (data) {
+
+				var location;
+
+				$.each(data.userLocationSnapshots, function (i, item) {
+					addMarker(item.temporalLocation.lat,item.temporalLocation.lng, item.user.id);
+				});
+
+			});
+		}
+
+		function addMarker(lat,lng,userId) {
+				marker = new google.maps.Marker({
+					position: new google.maps.LatLng(lat,lng),
+					map: map,
+				    title: "userId: " + userId
+				});
+				moveToLocation(lat,lng);
+		}
+		}); 
+	</script>
+</head>
+<body>
+    <input type="text" id="text" name="name" value="2008-11-15T10:13:36" />
+    <a href="#" class="button"><button>Enter</button></a>
+    <div id="map-canvas"></div>
+</body>
+</html>

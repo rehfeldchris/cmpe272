@@ -23,6 +23,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
+import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -52,7 +53,9 @@ public class JobProcessor extends HttpServlet {
 		Duration incubationTime = getDuration(request.getParameter("incubationTime"));
 		
 		
-		UserLocationDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		BuzzwordPoweredDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		
+		System.out.println(dataProvider.getUsersTest());
 		User user = dataProvider.getUser(originalInfectedUserId);
 		UserLocationSnapshot infectionStartPoint = dataProvider.getLocation(user, getDateTime(request, "startTime"));
 		
@@ -135,7 +138,8 @@ public class JobProcessor extends HttpServlet {
 	}
 	
 	private Gson getGson() {
-		return new GsonBuilder()
+		GsonBuilder builder = Converters.registerDateTime(new GsonBuilder());
+		return builder
 			.setDateFormat("yyyy-MM-dd'T'HH:mm:ssX") // use ISO 8601 format for serializing dates because js supports it well.
 			.setPrettyPrinting() 
 			.create();
