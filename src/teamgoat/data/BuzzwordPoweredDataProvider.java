@@ -227,7 +227,7 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 	public List<UserLocationSnapshot> getUsersWithinTimeRange(DateTime dateTime) throws DataAccessException {
 		QueryRunner runner = new QueryRunner();
 		try {
-			Duration moment = Duration.standardSeconds(120);
+			Duration moment = Duration.standardSeconds(120000);
 			DateTime instant = dateTime;
 			
 			Object[] sqlArgs = new Object[]{

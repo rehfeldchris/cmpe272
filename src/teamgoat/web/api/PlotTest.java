@@ -2,6 +2,7 @@ package teamgoat.web.api;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+
+import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -41,10 +44,12 @@ public class PlotTest extends HttpServlet {
 	}
 	
 	private Gson getGson() {
-		return new GsonBuilder()
+		GsonBuilder builder = Converters.registerDateTime(new GsonBuilder());
+		return builder
 			.setDateFormat("yyyy-MM-dd'T'HH:mm:ssX") // use ISO 8601 format for serializing dates because js supports it well.
-			.setPrettyPrinting() 
+			.setPrettyPrinting()
+			.serializeNulls()
 			.create();
 	}
-
+	
 }

@@ -141,7 +141,8 @@ public class JobProcessor extends HttpServlet {
 		GsonBuilder builder = Converters.registerDateTime(new GsonBuilder());
 		return builder
 			.setDateFormat("yyyy-MM-dd'T'HH:mm:ssX") // use ISO 8601 format for serializing dates because js supports it well.
-			.setPrettyPrinting() 
+			.setPrettyPrinting()
+			.serializeNulls()
 			.create();
 	}
 	
