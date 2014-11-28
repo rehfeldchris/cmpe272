@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Plague Tracker Tool</title>
 
     <!-- Bootstrap >
     <link href="dist/css/bootstrap.min.css" rel="stylesheet"-->
@@ -48,7 +48,7 @@
 	  <div class="container">
 		<h1>Tracker Tool <small>for emergencies</small></h1>
 		<p>This tool identifies the potentially infected person and back tracks the 
-		route he took and those who he had contact withs</p>
+		route he took and those who he had contact with</p>
 	  </div>
 	</div>
 	
@@ -59,26 +59,34 @@
           <p>The following options are available:</p>	
 		  
 			<div class="container">
-			  <form class="form-signin" role="form" action="process.php" method="post">
+			  <form class="form-signin" role="form" action="JobProcessor" method="post">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon">UserID</span>
-					<input type="text" class="form-control" placeholder="UserID" name="userid" required autofocus>
+					<input type="text" class="form-control" placeholder="UserID" name="originalInfectedUserId" value="126" required autofocus>
 				</div>
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon">Degree of freedom</span>
-					<input type="dof" class="form-control" placeholder="3 people" name="dof" required>
+					<input type="text" class="form-control" placeholder="3 people" name="maxNodeHopsFromOrigin" value="3" required>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">Max Result Size</span>
+					<input type="text" class="form-control" placeholder="100" name="maxResultSize" value="100" required>
 				</div>
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon">Distance</span>
-					<input type="dof" class="form-control" placeholder="1 feet" name="distance" required>
+					<input type="text" class="form-control" placeholder="1 yard" name="minInfectionRangeYards" value="1000000" required>
 				</div>
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon">Time in Contact</span>
-					<input type="dof" class="form-control" placeholder="3 or more seconds" name="time" required>
+					<input type="text" class="form-control" placeholder="HH:mm" name="maxTimeOfInfectionSpreading" value="00:03" required>
 				</div>
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon">Days to Track</span>
-					<input type="dof" class="form-control" placeholder="2 days" name="2days" required>
+					<input type="text" class="form-control" placeholder="HH:mm" name="incubationTime" value="00:01" required>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">Days to Track</span>
+					<input type="text" class="form-control" placeholder="yyyy-MM-dd'T'HH:mm:ss" name="startTime" value="2008-11-01T03:38:36" required>
 				</div>
 					
 				<div class="checkbox">
@@ -86,7 +94,7 @@
 					<input type="checkbox" value="remember-search"> Remember search
 				  </label>
 				</div>
-				<p><a class="btn btn-default" href="#" role="button" type="submit">Submit &raquo;</a></p>
+				<p><input class="btn btn-default" href="#" role="button" type="submit"/></p>
 			  </form>
 			</div> <!-- /container -->
           <!--p><a class="btn btn-default" href="#" role="button" type="submit">Submit &raquo;</a></p>
@@ -104,15 +112,13 @@
 	<hr>
 	
 	<footer>
-	  <p> &copy; CMPE272 Group 33: Amy Chou, Carita Ou, Chris Rehfeld, Liping</p>
+	  <p> &copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld, Liping</p>
 	</footer>
 	
 	
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed>
-    <script src="dist/js/bootstrap.min.js"></script -->
 	
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
