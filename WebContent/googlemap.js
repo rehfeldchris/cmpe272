@@ -497,6 +497,460 @@ function initialize() {
                         }
                     ]
                 };
+            case 66:
+            	return {
+                "userLocationSnapshots": [
+                                          {
+                                              "infectingUser": null,
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 66
+                                              },
+                                              "temporalLocation": {
+                                                  "lat": 39.9864366,
+                                                  "lng": 116.3697566,
+                                                  "timestamp": "2008-11-01T10:15:27.000-08:00"
+                                              }
+                                          },
+                                          {
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 66
+                                                  },
+                                              "temporalLocation": {
+                                                  "lat": 39.9864366,
+                                                  "lng": 116.3697566,
+                                                  "timestamp": "2008-11-01T10:15:27.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 2030
+                                              },
+                                              "temporalLocation": {
+                                                  "lat": 39.981543,
+                                                  "lng": 116.371013,
+                                                  "timestamp": "2008-11-01T10:15:34.000-08:00"
+                                              }
+                                          },
+                                          {
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 66
+                                                  },
+                                              "temporalLocation": {
+                                                  "lat": 39.9964366,
+                                                  "lng": 116.3797566,
+                                                  "timestamp": "2008-11-03T10:15:27.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 258
+                                              },
+                                              "temporalLocation": {
+                                                  "lat": 39.9964367,
+                                                  "lng": 116.3797567,
+                                                  "timestamp": "2008-11-03T10:15:27.000-08:00"
+                                              }
+                                          },
+                                          {
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 258
+                                                  },
+                                              "temporalLocation": {
+                                                  "lat": 39.967871,
+                                                  "lng": 116.365759,
+                                                  "timestamp": "2008-11-13T12:15:30.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 932
+                                              },
+                                              "temporalLocation": {
+                                                  "lat": 39.967872,
+                                                  "lng": 116.365750,
+                                                  "timestamp": "2008-11-13T12:15:30.000-08:00"
+                                              }
+                                          },
+                                          {
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 39.967872,
+                  									"lng": 116.365750,
+                  									"timestamp": "2008-11-13T12:15:30.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 15
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 39.979557,
+                  								"lng": 116.358358,
+                  								"timestamp": "2008-11-15T10:22:33.000-08:00"
+                                              }
+                                          },
+                                          {
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 39.979566,
+                  									"lng": 116.358368,
+                  									"timestamp": "2008-11-15T10:22:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 222
+                                              },
+                                              "temporalLocation": {
+                  									"lat": 39.979569,
+                  									"lng": 116.358369,
+                  									"timestamp": "2008-11-15T10:23:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 39.979566,
+                  									"lng": 116.358368,
+                  									"timestamp": "2008-11-15T10:22:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 223
+                                              },
+                                              "temporalLocation": {
+                  									"lat": 39.979561,
+                  									"lng": 116.358361,
+                  									"timestamp": "2008-11-15T10:23:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 39.979566,
+                  									"lng": 116.358368,
+                  									"timestamp": "2008-11-16T05:22:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 54
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 39.979560,
+                  								"lng": 116.358360,
+                  								"timestamp": "2008-11-17T10:23:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 39.988888,
+                  									"lng": 117.358368,
+                  									"timestamp": "2008-11-18T05:22:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 654
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 39.988888,
+                  								"lng": 117.358368,
+                  								"timestamp": "2008-11-18T05:22:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 40.255555,
+                  									"lng": 117.063421,
+                  									"timestamp": "2008-11-18T09:22:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 777
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 40.255556,
+                  								"lng": 117.063426,
+                  								"timestamp": "2008-11-18T09:22:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 40.055555,
+                  									"lng": 117.163421,
+                  									"timestamp": "2008-11-19T00:22:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 152
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 40.055556,
+                  								"lng": 117.163426,
+                  								"timestamp": "2008-11-18T00:22:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.876214,
+                  									"lng": -117.235458,
+                  									"timestamp": "2008-11-20T00:45:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 3042
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.876214,
+                  								"lng": -117.235458,
+                  								"timestamp": "2008-11-20T00:45:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.886214,
+                  									"lng": -117.245458,
+                  									"timestamp": "2008-11-20T01:33:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 3044
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.886224,
+                  								"lng": -117.245437,
+                  								"timestamp": "2008-11-20T01:33:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 932
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.896314,
+                  									"lng": -117.245358,
+                  									"timestamp": "2008-11-20T03:33:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 3077
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.896324,
+                  								"lng": -117.245337,
+                  								"timestamp": "2008-11-20T03:33:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 3077
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.936324,
+                  									"lng": -117.255337,
+                  									"timestamp": "2008-11-21T03:12:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 3451
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.936324,
+                  								"lng": -117.255337,
+                  								"timestamp": "2008-11-21T03:12:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 3077
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.904313,
+                  									"lng": -117.237048,
+                  									"timestamp": "2008-11-21T03:12:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 3567
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.904313,
+                  								"lng": -117.237048,
+                  								"timestamp": "2008-11-21T03:12:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 3077
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.936324,
+                  									"lng": -117.255337,
+                  									"timestamp": "2008-11-21T03:12:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 3100
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.945324,
+                  								"lng": -117.255337,
+                  								"timestamp": "2008-11-21T03:12:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 3077
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.996324,
+                  									"lng": -117.135337,
+                  									"timestamp": "2008-11-22T03:12:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 1253
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.996324,
+                  								"lng": -117.135337,
+                  								"timestamp": "2008-11-22T03:12:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 3077
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 33.000012,
+                  									"lng": -117.055337,
+                  									"timestamp": "2008-11-24T08:18:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 1115
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 33.000012,
+                  								"lng": -117.055337,
+                  								"timestamp": "2008-11-24T08:18:32.000-08:00"
+                                              }
+                                          },
+                  						{
+                                              "infectingUser": {
+                                                  "infectingUser": null,
+                                                  "user": {
+                                                      "name": "",
+                                                      "id": 3077
+                                                  },
+                                                  "temporalLocation": {
+                  									"lat": 32.525573,
+                  									"lng": -117.112268,
+                  									"timestamp": "2008-11-25T08:18:32.000-08:00"
+                                                  }
+                                              },
+                                              "user": {
+                                                  "name": "",
+                                                  "id": 1777
+                                              },
+                                              "temporalLocation": {
+                  								"lat": 32.525573,
+                  								"lng": -117.112268,
+                  								"timestamp": "2008-11-25T08:18:32.000-08:00"
+                                              }
+                                          },
+                                      ]
+                                  };
 
         }
     }
