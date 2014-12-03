@@ -1,122 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Plague Tracker Tool</title>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plague Tracker Tool</title>
 
-    <!-- Bootstrap >
+<!-- Bootstrap >
     <link href="dist/css/bootstrap.min.css" rel="stylesheet"-->
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
 
-	<!-- own css -->
-    <link rel="stylesheet" type="text/css" href="style.css" >
-	
-	<!-- load the goole maps api-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOD034Bq1uCOT3wAiFR7KxXKUfXSS-v5s"></script>
-    <script src="googlemap.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- own css -->
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<!-- load the goole maps api-->
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOD034Bq1uCOT3wAiFR7KxXKUfXSS-v5s"></script>
+<script src="googlemap.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Profile</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse"/>
-      </div>
-    </nav>
-  
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Profile</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse" />
+		</div>
+	</nav>
+
 	<!-- jumbotron header -->
 	<div class="jumbotron">
-	  <div class="container">
-		<h1>Infectious disease </h1>
-		<p>This tool identifies the potentially infected person and back tracks the 
-		route he took and those who he had contact with</p>
-	  </div>
+		<div class="container">
+			<p>This tool allows you analyze user locstion data to see how an infectious disease might spread.</p>
+		</div>
 	</div>
-	
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Variable inputs</h2>
-          <p>The following options are available:</p>	
-		  
-			<div class="container">
-			  <form class="form-signin" role="form" action="JobProcessor" method="post">
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Original Infected UserID</span>
-					<input type="text" class="form-control" placeholder="UserID" name="originalInfectedUserId" value="126" required autofocus>
-				</div>
-				  <div class="input-group input-group-sm">
-					  <span class="input-group-addon">Start Date</span>
-					  <input type="text" class="form-control" placeholder="yyyy-MM-dd'T'HH:mm:ss" name="startTime" value="2008-11-01T03:38:36" required>
-				  </div>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Max infection hops</span>
-					<input type="text" class="form-control" placeholder="3 people" name="maxNodeHopsFromOrigin" value="3" required>
-				</div>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Max Infected Users</span>
-					<input type="text" class="form-control" placeholder="100" name="maxResultSize" value="100" required>
-				</div>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Max infection distance</span>
-					<input type="text" class="form-control" placeholder="1 yard" name="minInfectionRangeYards" value="1000000" required>
-				</div>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Max time infection spreading</span>
-					<input type="text" class="form-control" placeholder="HH:mm" name="maxTimeOfInfectionSpreading" value="00:03" required>
-				</div>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Incubation Time</span>
-					<input type="text" class="form-control" placeholder="HH:mm" name="incubationTime" value="00:01" required>
-				</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="container">
+					<form class="form-signin" role="form" action="JobProcessor"
+						method="post">
+						<div class="panel panel-danger">
+							<div class="panel-heading">Original Infected User</div>
+							<div class="panel-body">
+								<div class="input-group input-group-sm">
+									<span class="input-group-addon">User ID</span>
+									<input type="text" class="form-control" placeholder="UserID"
+										name="originalInfectedUserId" value="126" required autofocus>
+								</div>
+								<div class="input-group input-group-sm">
+									<span class="input-group-addon">Time When Infected</span> <input
+										type="text" class="form-control"
+										placeholder="yyyy-MM-dd'T'HH:mm:ss" name="startTime"
+										value="2008-11-01T03:38:36" required>
+								</div>
+							</div>
+						</div>
+
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">Disease Attributes</div>
+                            <div class="panel-body">
+		                        <div class="input-group input-group-sm">
+		                            <span class="input-group-addon">Max infection hops</span> <input
+		                                type="text" class="form-control" placeholder="3 people"
+		                                name="maxNodeHopsFromOrigin" value="3" required>
+		                        </div>
+		                        <div class="input-group input-group-sm">
+		                            <span class="input-group-addon">Infection proximity <small>(meters)</small></span>
+		                            <input type="text" class="form-control" placeholder="1 meter"
+		                                name="minInfectionRangeYards" value="5" required>
+		                        </div>
+		                        <div class="input-group input-group-sm">
+		                            <span class="input-group-addon">Incubation Time <small>(hh:mm)</small></span>
+		                            <input type="text" class="form-control" placeholder="HH:mm"
+		                                name="incubationTime" value="00:01" required>
+		                        </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-success">
+                            <div class="panel-heading">Analysis Attributes</div>
+                            <div class="panel-body">
+		                        <div class="input-group input-group-sm">
+		                            <span class="input-group-addon">Limit Max Infected Users</span> <input
+		                                type="text" class="form-control" placeholder="100"
+		                                name="maxResultSize" value="100" required>
+		                        </div>
+		                        <div class="input-group input-group-sm">
+		                            <span class="input-group-addon">Simulation Duration <small>(hh:mm)</small></span>
+		                            <input type="text" class="form-control" placeholder="HH:mm"
+		                                name="maxTimeOfInfectionSpreading" value="24:00" required>
+		                        </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
 
 
-				  <p><br><input class="btn btn-default" role="button" type="submit" value="Submit"></p>
-			  </form>
-			</div> <!-- /container -->
-          <!--p><a class="btn btn-default" href="#" role="button" type="submit">Submit &raquo;</a></p>
+
+						<p>
+							<br>
+							<input class="btn btn-default" role="button" type="submit"
+								value="Submit">
+						</p>
+					</form>
+				</div>
+				<!-- /container -->
+				<!--p><a class="btn btn-default" href="#" role="button" type="submit">Submit &raquo;</a></p>
           <p><a class="btn btn-default" href="#" role="button" type="reset">Clear &raquo;</a></p-->
-        </div>
-	  </div>
+			</div>
+		</div>
 	</div>
-	
-	<hr>
-	<br>
-			  
-	<div id="map_canvas"></div>
-	
-	<br>
-	<hr>
-	
-	<footer>
-	  <p> &copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld, Liping</p>
-	</footer>
-	
-	
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	
+	<hr>
+	<br>
+
+	<div id="map_canvas"></div>
+
+	<br>
+	<hr>
+
+	<footer>
+		<p>&copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld,
+			Liping</p>
+	</footer>
+
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  </body>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
 </html>

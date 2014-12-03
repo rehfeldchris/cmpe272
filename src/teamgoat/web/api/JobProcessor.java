@@ -46,7 +46,7 @@ public class JobProcessor extends HttpServlet {
 		Integer originalInfectedUserId = getParamAsInt(request, "originalInfectedUserId");
 		Integer maxNodeHopsFromOrigin = getParamAsInt(request, "maxNodeHopsFromOrigin");
 		Integer maxResultSize = getParamAsInt(request, "maxResultSize");
-		Double maximumInfectionRangeInMeters = getParamAsDouble(request, "minInfectionRangeYards");
+		Double maximumInfectionRangeInMeters = (double) 1000000;//getParamAsDouble(request, "minInfectionRangeYards");
 		Duration maxTimeOfInfectionSpreading = getDuration(request.getParameter("maxTimeOfInfectionSpreading"));
 		Duration incubationTime = getDuration(request.getParameter("incubationTime"));
 		
