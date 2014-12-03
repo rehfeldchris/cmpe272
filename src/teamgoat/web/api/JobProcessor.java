@@ -59,8 +59,9 @@ public class JobProcessor extends HttpServlet {
 		
 		List<InfectedUserLocationSnapshot> results = getResults(infectionStartPoint, maxTimeOfInfectionSpreading, incubationTime, maxNodeHopsFromOrigin, maxResultSize, maximumInfectionRangeInMeters);
 		
+		System.out.printf("Produced %d infected\n", results.size());
 		String json = getGson().toJson(new ApiResponse(results));
-		response.setContentType("application/javascript");
+		response.setContentType("application/json");
 		response.getWriter().write(json);
 	}
 	

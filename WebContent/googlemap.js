@@ -8,6 +8,12 @@ function initialize() {
     var map = new google.maps.Map(mapCanvas, mapOptions);
 
     $(".form-signin").on("submit", function(event){
+        var userId = Number($(this).find("input[name=originalInfectedUserId]").val());
+        var mockData = getMockedData(userId);
+        if (mockData) {
+            plotData(mockData);
+            return;
+        }
         $.ajax({
             url : $(this).attr("action"),
             type: "GET",
@@ -36,7 +42,6 @@ function initialize() {
                     title: element.user.id.toString(),
                     animation: google.maps.Animation.DROP,
                     position: latlng,
-                    icon: '/plague/men.png'
                 });
             //InfoWindow
             google.maps.event.addListener(marker, 'click', function()
@@ -66,9 +71,15 @@ function initialize() {
             });
     }
 
-    0&&$.getJSON("http://localhost:8080/plague/JobProcessor?originalInfectedUserId=126&maxNodeHopsFromOrigin=1&maxResultSize=100&minInfectionRangeYards=1000000&maxTimeOfInfectionSpreading=00%3A03&incubationTime=00%3A01&startTime=2008-11-01T03:38:36", function(data)
-    {
+    function getMockedData(userId) {
+        switch (userId) {
+            case 55:
+                return [];
 
-    });
+        }
+    }
+
+
+
 }
 google.maps.event.addDomListener(window, 'load', initialize);

@@ -61,40 +61,36 @@
 			<div class="container">
 			  <form class="form-signin" role="form" action="JobProcessor" method="post">
 				<div class="input-group input-group-sm">
-					<span class="input-group-addon">UserID</span>
+					<span class="input-group-addon">Original Infected UserID</span>
 					<input type="text" class="form-control" placeholder="UserID" name="originalInfectedUserId" value="126" required autofocus>
 				</div>
+				  <div class="input-group input-group-sm">
+					  <span class="input-group-addon">Start Date</span>
+					  <input type="text" class="form-control" placeholder="yyyy-MM-dd'T'HH:mm:ss" name="startTime" value="2008-11-01T03:38:36" required>
+				  </div>
 				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Degree of freedom</span>
+					<span class="input-group-addon">Max infection hops</span>
 					<input type="text" class="form-control" placeholder="3 people" name="maxNodeHopsFromOrigin" value="3" required>
 				</div>
 				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Max Result Size</span>
+					<span class="input-group-addon">Max Infected Users</span>
 					<input type="text" class="form-control" placeholder="100" name="maxResultSize" value="100" required>
 				</div>
 				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Distance</span>
+					<span class="input-group-addon">Max infection distance</span>
 					<input type="text" class="form-control" placeholder="1 yard" name="minInfectionRangeYards" value="1000000" required>
 				</div>
 				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Time in Contact</span>
+					<span class="input-group-addon">Max time infection spreading</span>
 					<input type="text" class="form-control" placeholder="HH:mm" name="maxTimeOfInfectionSpreading" value="00:03" required>
 				</div>
 				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Days to Track</span>
+					<span class="input-group-addon">Incubation Time</span>
 					<input type="text" class="form-control" placeholder="HH:mm" name="incubationTime" value="00:01" required>
 				</div>
-				<div class="input-group input-group-sm">
-					<span class="input-group-addon">Days to Track</span>
-					<input type="text" class="form-control" placeholder="yyyy-MM-dd'T'HH:mm:ss" name="startTime" value="2008-11-01T03:38:36" required>
-				</div>
-					
-				<div class="checkbox">
-				  <label>
-					<input type="checkbox" value="remember-search"> Remember search
-				  </label>
-				</div>
-				  <p><input class="btn btn-default" role="button" type="submit" value="Submit"></p>
+
+
+				  <p><br><input class="btn btn-default" role="button" type="submit" value="Submit"></p>
 			  </form>
 			</div> <!-- /container -->
           <!--p><a class="btn btn-default" href="#" role="button" type="submit">Submit &raquo;</a></p>

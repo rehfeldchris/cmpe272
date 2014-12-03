@@ -23,9 +23,9 @@ import teamgoat.entity.UserLocationSnapshot;
 
 public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 	
-	private static final String db = "jdbc:db2://bi-hadoop-prod-319.services.dal.bluemix.net:51000/bigsql";
+	private static final String db = "jdbc:db2://bi-hadoop-prod-499.services.dal.bluemix.net:51000/bigsql";
 	static final String user = "biblumix";
-	static final String pwd = "ak8p~3@wh5lI";
+	static final String pwd = "h672k@c5S1t~";
 	
 	private Connection conn;
 	// this uses the haversine formula to calculate distance from lat/lng. Its gets innacurate the farther you get from the equator....but its the best we got for now.
@@ -69,6 +69,9 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 			"and LONGITUDE between ? and ?\r\n" + 
 			""
 			;
+	
+	
+	
 	
 	private Connection getConnection() {
 		if (conn == null) {
@@ -234,17 +237,34 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 			Object[] sqlArgs = new Object[]{
 	    		formatForSql(instant.withDurationAdded(moment, -1)),
 	    		formatForSql(instant.withDurationAdded(moment, 1)),
+	    		formatForSql(instant.withDurationAdded(moment, -1)),
+	    		formatForSql(instant.withDurationAdded(moment, 1)),
 			};
 
+//			String sqlStatement = "	  \r\n" + 
+//					"select max(latitude) latitude\r\n" + 
+//					"     , max(longitude) longitude\r\n" + 
+//					"	 , max(time) time\r\n" + 
+//					"	 , userid\r\n" + 
+//					"FROM bigsql.usertrajectorydata\r\n" + 
+//					"where TIME between TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
+//					"and TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
+//					"group by USERID\r\n" +
+//					"";
+			
+			
 			String sqlStatement = "	  \r\n" + 
-					"select max(latitude) latitude\r\n" + 
-					"     , max(longitude) longitude\r\n" + 
-					"	 , max(time) time\r\n" + 
-					"	 , userid\r\n" + 
-					"FROM bigsql.usertrajectorydata\r\n" + 
+					"select a.LATITUDE\r\n" + 
+					"     , a.LONGITUDE\r\n" + 
+					"	 , a.USERID\r\n" + 
+					"	 , a.TIME\r\n" + 
+					"FROM (select * FROM bigsql.usertrajectorydata\r\n" + 
+					"where TIME between TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
+					"and TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n) a\r\n" + 
+					"inner join (select USERID, MAX(TIME) MAXTIME from bigsql.usertrajectorydata\r\n" +
 					"where TIME between TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
 					"and TIMESTAMP_FORMAT(cast(? as varchar(20)), 'YYYY-MM-DD HH24:MI:SS')\r\n" +
-					"group by USERID\r\n" +
+					"group by USERID) b on a.USERID=b.USERID and a.TIME=b.MAXTIME\r\n" +
 					"";
 			
 			System.out.println(sqlStatement);
