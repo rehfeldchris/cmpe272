@@ -40,14 +40,21 @@ function initialize() {
         {
             latlng = new google.maps.LatLng(element.temporalLocation.lat, element.temporalLocation.lng);
             lineCoordinates.push(latlng);
-            //Marker
-            var marker = new google.maps.Marker(
-                {
-                    map: map,
-                    title: element.user.id.toString(),
-                    animation: google.maps.Animation.DROP,
-                    position: latlng,
-                });
+            //Marker            
+            var icon = 'http://www.google.com/mapfiles/marker.png';
+            if (index == 0) {
+                icon = 'http://www.google.com/mapfiles/dd-start.png';
+            }
+            if (index == userLocationSnapshots.length - 1) {
+                icon = 'http://www.google.com/mapfiles/dd-end.png';
+            }
+            var marker = new google.maps.Marker({
+                map: map,
+                title: element.user.id.toString(),
+                animation: google.maps.Animation.DROP,
+                position: latlng,
+                icon: icon
+            });
             //InfoWindow
             google.maps.event.addListener(marker, 'click', function()
             {
