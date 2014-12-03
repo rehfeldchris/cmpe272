@@ -1,13 +1,8 @@
 package teamgoat.web.api;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -19,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
@@ -44,7 +38,7 @@ public class JobProcessor extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer originalInfectedUserId = getParamAsInt(request, "originalInfectedUserId");
 		Integer maxNodeHopsFromOrigin = getParamAsInt(request, "maxNodeHopsFromOrigin");
 		Integer maxResultSize = getParamAsInt(request, "maxResultSize");
@@ -99,12 +93,12 @@ public class JobProcessor extends HttpServlet {
 		User chris = new User("Chris", 1);
 		User carita = new User("Carita", 2);
 		User amy = new User("Amy", 3);
-		User thong = new User("Thong", 4);
+		User liping = new User("Liping", 4);
 		List<InfectedUserLocationSnapshot> records = new ArrayList<>();
 		records.addAll(mockRecordsForUser(chris));
 		records.addAll(mockRecordsForUser(carita));
 		records.addAll(mockRecordsForUser(amy));
-		records.addAll(mockRecordsForUser(thong));
+		records.addAll(mockRecordsForUser(liping));
 		return records;
 	}
 	
