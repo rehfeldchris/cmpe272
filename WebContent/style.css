@@ -7,9 +7,31 @@
     background-color: #CCC;
 	border-style: solid;
 	border-width: 1px;
+	box-shadow: 5px 7px 10px #888888;
 }
 
 #footer {
 	margin: 0 0 0 0;
     padding-left: 5px;
+}
+
+span.input-group-addon {
+	width: 180px;
+	text-align: left;
+}
+
+.input-group {
+	width: 500px;
+}
+
+h1 {
+    text-shadow: 4px 4px #FFFFFF;
+}
+
+.btn-default {
+	box-shadow: 2px 2px 5px #888888;
+}
+
+hr {
+	border-top: 1px solid #E4E2E2;
 }
