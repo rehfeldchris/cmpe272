@@ -48,6 +48,7 @@ function initialize() {
             //Marker            
             var icon = 'http://www.google.com/mapfiles/marker.png';
             if (index == 0) {
+            	map.setCenter(latlng);
                 icon = 'http://www.google.com/mapfiles/dd-start.png';
             }
             if (index == userLocationSnapshots.length - 1) {
