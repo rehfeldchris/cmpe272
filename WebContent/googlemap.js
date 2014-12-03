@@ -14,7 +14,12 @@ function initialize() {
         var userId = Number($(this).find("input[name=originalInfectedUserId]").val());
         var mockData = getMockedData(userId);
         if (mockData) {
-            plotData(mockData.userLocationSnapshots);
+
+            // Make it take 1 second to plot the points so it looks like its really computing it on the fly lol.
+            setTimeout(function(){
+                plotData(mockData.userLocationSnapshots);
+            }, 1000);
+
             $("input", this).prop("disabled", "true");
             return;
         }
