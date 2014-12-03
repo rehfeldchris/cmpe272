@@ -41,16 +41,21 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Profile</a>
+				<a class="navbar-brand" href="#">Plague Tracker</a>
 			</div>
-			<div id="navbar" class="navbar-collapse collapse" />
+			<div id="navbar" class="collapse navbar-collapse pull-right">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Home</a></li>
+					<li class="active"><a href="/plague">Visualizer</a></li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
 	<!-- jumbotron header -->
 	<div class="jumbotron">
 		<div class="container">
-			<p>This tool allows you analyze user locstion data to see how an infectious disease might spread.</p>
+			<p>This tool allows you to analyze user location data to see how an infectious disease is currently spreading across the population.</p>
 		</div>
 	</div>
 
@@ -72,7 +77,7 @@
 								<div class="input-group input-group-sm">
 									<span class="input-group-addon">Time When Infected</span> <input
 										type="text" class="form-control"
-										placeholder="yyyy-MM-dd'T'HH:mm:ss" name="startTime"
+										placeholder="yyyy-MM-ddTHH:mm:ss" name="startTime"
 										value="2008-11-01T03:38:36" required>
 								</div>
 							</div>

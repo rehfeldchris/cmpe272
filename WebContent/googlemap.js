@@ -88,7 +88,7 @@ function initialize() {
             });
     }
 
-    // special users: 55,
+    // special users: 55,66,888
     function getMockedData(userId) {
         switch (userId) {
             case 55:

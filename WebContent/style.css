@@ -35,3 +35,6 @@ h1 {
 hr {
 	border-top: 1px solid #E4E2E2;
 }
+.jumbotron {
+	margin-top: 40px;
+}
