@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cea1673-7c51-46a3-9771-442e65251962" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/teamgoat/data/BuzzwordPoweredDataProvider.java" afterPath="$PROJECT_DIR$/src/teamgoat/data/BuzzwordPoweredDataProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/teamgoat/web/api/JobProcessor.java" afterPath="$PROJECT_DIR$/src/teamgoat/web/api/JobProcessor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/googlemap.js" afterPath="$PROJECT_DIR$/WebContent/googlemap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/index.html" afterPath="$PROJECT_DIR$/WebContent/index.html" />
     </list>
     <ignored path="plague.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,8 +30,8 @@
       <file leaf-file-name="googlemap.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WebContent/googlemap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9810056" vertical-offset="125" max-vertical-offset="1547">
-              <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.32290503" vertical-offset="0" max-vertical-offset="8721">
+              <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -43,8 +40,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WebContent/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.884615" vertical-offset="493" max-vertical-offset="2159">
-              <caret line="64" column="109" selection-start-line="64" selection-start-column="87" selection-end-line="64" selection-end-column="109" />
+            <state vertical-scroll-proportion="-27.461538" vertical-offset="646" max-vertical-offset="2159">
+              <caret line="80" column="109" selection-start-line="80" selection-start-column="87" selection-end-line="80" selection-end-column="109" />
               <folding />
             </state>
           </provider>
@@ -254,16 +251,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.884615" vertical-offset="493" max-vertical-offset="2159">
-          <caret line="64" column="109" selection-start-line="64" selection-start-column="87" selection-end-line="64" selection-end-column="109" />
+        <state vertical-scroll-proportion="-27.461538" vertical-offset="646" max-vertical-offset="2159">
+          <caret line="80" column="109" selection-start-line="80" selection-start-column="87" selection-end-line="80" selection-end-column="109" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/googlemap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9810056" vertical-offset="125" max-vertical-offset="1547">
-          <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.32290503" vertical-offset="0" max-vertical-offset="8721">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
           <folding />
         </state>
       </provider>
