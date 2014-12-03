@@ -37,7 +37,11 @@ public class JobProcessor extends HttpServlet {
     public JobProcessor() {
         super();
     }
-
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer originalInfectedUserId = getParamAsInt(request, "originalInfectedUserId");
 		Integer maxNodeHopsFromOrigin = getParamAsInt(request, "maxNodeHopsFromOrigin");
