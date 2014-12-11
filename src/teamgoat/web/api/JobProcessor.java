@@ -1,9 +1,7 @@
 package teamgoat.web.api;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +19,9 @@ import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import teamgoat.data.BuzzwordPoweredDataProvider;
+import teamgoat.data.Db2BigSqlDataProvider;
 import teamgoat.data.UserLocationDataProvider;
 import teamgoat.entity.InfectedUserLocationSnapshot;
-import teamgoat.entity.TemporalLocation;
 import teamgoat.entity.User;
 import teamgoat.entity.UserLocationSnapshot;
 import teamgoat.model.IncubationPeriodAndMaxHopsContagionDeterminer;
@@ -46,16 +43,20 @@ public class JobProcessor extends HttpServlet {
 		Integer originalInfectedUserId = getParamAsInt(request, "originalInfectedUserId");
 		Integer maxNodeHopsFromOrigin = getParamAsInt(request, "maxNodeHopsFromOrigin");
 		Integer maxResultSize = getParamAsInt(request, "maxResultSize");
-		Double maximumInfectionRangeInMeters = (double) 1000000;//getParamAsDouble(request, "minInfectionRangeYards");
+		Double maximumInfectionRangeInMeters = getParamAsDouble(request, "minInfectionRangeYards");
 		Duration maxTimeOfInfectionSpreading = getDuration(request.getParameter("maxTimeOfInfectionSpreading"));
 		Duration incubationTime = getDuration(request.getParameter("incubationTime"));
 		
 		
-		BuzzwordPoweredDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		Db2BigSqlDataProvider dataProvider = new Db2BigSqlDataProvider();
 		
 		System.out.println(dataProvider.getUsersTest());
 		User user = dataProvider.getUser(originalInfectedUserId);
 		UserLocationSnapshot infectionStartPoint = dataProvider.getLocation(user, getDateTime(request, "startTime"));
+		// If no record was found, try to find a record for the userid at any time we can. This makes using the tool easier.
+		if (infectionStartPoint == null) {
+			infectionStartPoint = dataProvider.getLocationAtArbitraryTime(user);
+		}
 		
 		List<InfectedUserLocationSnapshot> results = getResults(infectionStartPoint, maxTimeOfInfectionSpreading, incubationTime, maxNodeHopsFromOrigin, maxResultSize, maximumInfectionRangeInMeters);
 		
@@ -94,48 +95,6 @@ public class JobProcessor extends HttpServlet {
 		}
 	}
 	
-	private List<InfectedUserLocationSnapshot> getMockData() {
-		User chris = new User("Chris", 1);
-		User carita = new User("Carita", 2);
-		User amy = new User("Amy", 3);
-		User liping = new User("Liping", 4);
-		List<InfectedUserLocationSnapshot> records = new ArrayList<>();
-		records.addAll(mockRecordsForUser(chris));
-		records.addAll(mockRecordsForUser(carita));
-		records.addAll(mockRecordsForUser(amy));
-		records.addAll(mockRecordsForUser(liping));
-		return records;
-	}
-	
-	private List<InfectedUserLocationSnapshot> mockRecordsForUser(User user) {
-		List<InfectedUserLocationSnapshot> records = new ArrayList<>();
-		Random rand = new Random();
-		double lat = 37.7833 + rand.nextDouble();
-		double lng = 122.4167 + rand.nextDouble();
-		for (int i = 0; i < 5; i++) {
-			records.add(new InfectedUserLocationSnapshot(
-					user,
-					new TemporalLocation(
-						lat + rand.nextDouble(), 
-						lng + rand.nextDouble(), 
-						makeDate(i)
-					),
-					null
-			));
-		}
-		return records;
-	}
-	
-	private DateTime makeDate(int minutesToAdd) {
-		return DateTimeFormat
-				.forPattern("yyyy-MM-DD HH:mm:ss")
-				.parseDateTime("2014-11-12 12:33:44")
-				.withDurationAdded(
-					Duration.standardMinutes(1), 
-					minutesToAdd
-				);
-	}
-	
 	private Gson getGson() {
 		GsonBuilder builder = Converters.registerDateTime(new GsonBuilder());
 		return builder
@@ -146,7 +105,7 @@ public class JobProcessor extends HttpServlet {
 	}
 	
 	private List<InfectedUserLocationSnapshot> getResults(UserLocationSnapshot origionalInfectedUser, Duration maxTimeOfInfectionSpreading, Duration incubationTime, int maxContagionHopsFromOrigin, int maxResultSize, double maximumInfectionRangeInMeters) {
-		UserLocationDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		UserLocationDataProvider dataProvider = new Db2BigSqlDataProvider();
 		
 		InfectionGraphGenerator generator = new InfectionGraphGenerator(
 			dataProvider, 

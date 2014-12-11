@@ -23,16 +23,22 @@ function initialize() {
             $("input", this).prop("disabled", "true");
             return;
         }
+        
+        $("#wait").slideDown();
 
         $.ajax({
             url : $(this).attr("action"),
             type: "GET",
             data : $(this).serializeArray(),
             success:function(data) {
+            	$("#wait").slideUp();
                 plotData(data.userLocationSnapshots);
             },
             error: function(){
+            	$("#wait").slideUp();
                 console.log(arguments);
+                alert("Server Error. This is usually caused by not finding the userid/timestamp combo as an actual data point. Enter a valid data point.");
+                
             }
         });
 

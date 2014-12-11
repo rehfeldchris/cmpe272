@@ -13,6 +13,7 @@
     <script type="text/javascript">
 		jQuery(document).ready(function() {
 		    jQuery(document).on("click", ".button", function(e) {
+		    	$("#wait").slideDown();
 		        e.preventDefault();
 		        var dateTime = $("#text").val();          
 		        var seconds = $("#seconds").val();
@@ -43,27 +44,38 @@
 				var location;
 
 				$.each(data.userLocationSnapshots, function (i, item) {
-					addMarker(item.temporalLocation.lat,item.temporalLocation.lng, item.user.id);
+					addMarker(item.temporalLocation.lat,item.temporalLocation.lng, item.user.id, item.temporalLocation.timestamp.split(/\./)[0]);
 				});
 
 			});
 		}
 
-		function addMarker(lat,lng,userId) {
-				marker = new google.maps.Marker({
+		function addMarker(lat,lng,userId,ts) {
+				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(lat,lng),
 					map: map,
-				    title: "userId: " + userId
+				    title: "userId: " + userId + " timestamp:" + ts
 				});
+	            google.maps.event.addListener(marker, 'click', function()
+                {
+                    var infowindow = new google.maps.InfoWindow(
+                        {
+                            content: '<div style="height: 100px">' + marker.title + '</div>'
+                        });
+                    infowindow.open(map, marker);
+                });
 				moveToLocation(lat,lng);
 		}
 		}); 
 	</script>
 </head>
 <body>
-    date: <input type="text" id="text" name="name" value="2008-11-15T10:13:36" /> 
-    seconds: <input type="text" id="seconds" name="name" value="12000" />
-    <a href="#" class="button"><button>Enter</button></a>
+find users records within +- <input type="text" id="seconds" name="name" value="12000" size=5 /> seconds 
+ of datetime: <input type="text" id="text" name="name" value="2008-11-15T10:13:36" /> <br><a href="#" class="button"><button>Search</button></a>
+                                <div id="wait" style="display: none;">Please wait a moment...searching. Clickable markers will show up in a moment.</div>
+    <p>This tool helps you find data points that exist in our system. It will produce user locations near the time you enter. Then you can use one of these user/timestamp combos
+    to enter into the <a href="index.html">infection simulator</a></p>
+    
     <div id="map-canvas"></div>
 </body>
 </html>

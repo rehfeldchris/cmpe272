@@ -16,7 +16,7 @@ import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import teamgoat.data.BuzzwordPoweredDataProvider;
+import teamgoat.data.Db2BigSqlDataProvider;
 import teamgoat.entity.UserLocationSnapshot;
 
 @WebServlet(name = "PlotTest", urlPatterns = { "/PlotTest" })
@@ -31,7 +31,7 @@ public class PlotTest extends HttpServlet {
 		DateTime dateTime = getDateTime(request, "dateTime");
 		int seconds = Integer.parseInt(request.getParameter("seconds"));
 		
-		BuzzwordPoweredDataProvider dataProvider = new BuzzwordPoweredDataProvider();
+		Db2BigSqlDataProvider dataProvider = new Db2BigSqlDataProvider();
 		
 		List<UserLocationSnapshot> results = dataProvider.getUsersWithinTimeRange(dateTime, seconds);
 		

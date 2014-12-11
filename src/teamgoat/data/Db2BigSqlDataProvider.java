@@ -21,7 +21,7 @@ import teamgoat.entity.TemporalLocation;
 import teamgoat.entity.User;
 import teamgoat.entity.UserLocationSnapshot;
 
-public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
+public class Db2BigSqlDataProvider implements UserLocationDataProvider {
 	
 	private static final String db = "jdbc:db2://bi-hadoop-prod-499.services.dal.bluemix.net:51000/bigsql";
 	static final String user = "biblumix";
@@ -95,7 +95,7 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 		try {
 			Duration moment = Duration.standardSeconds(2);
 			DateTime instant = temporalLocation.getTimestamp();
-			double rangeFactor = 0.001;
+			double rangeFactor = 0.1;
 			double boundingBoxPlusMinus = maxRangeInMeters * rangeFactor;
 			
 			Object[] sqlArgs = new Object[]{
@@ -136,6 +136,25 @@ public class BuzzwordPoweredDataProvider implements UserLocationDataProvider {
 	    		user.getId(),
 	    		formatForSql(instant.withDurationAdded(moment, -1)),
 	    		formatForSql(instant.withDurationAdded(moment, 1))
+    		);
+
+		    return toUserLocationSnapshot(row);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	public UserLocationSnapshot getLocationAtArbitraryTime(User user) throws DataAccessException {
+		QueryRunner runner = new QueryRunner();
+		try {
+		    String sql = "select USERID, LATITUDE, LONGITUDE, TIME from bigsql.usertrajectorydata where userid=? fetch first 1 rows only";
+		    Map<String, Object> row = runner.query(
+	    		getConnection(), 
+	    		sql, 
+	    		new MapHandler(), 
+	    		user.getId()
     		);
 
 		    return toUserLocationSnapshot(row);

@@ -45,7 +45,7 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse pull-right">
 				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
+					<li><a href="plot.html">User Data Point Locator</a></li>
 					<li class="active"><a href="/plague">Visualizer</a></li>
 				</ul>
 			</div>
@@ -55,7 +55,7 @@
 	<!-- jumbotron header -->
 	<div class="jumbotron">
 		<div class="container">
-			<p>This tool allows you to analyze user location data to see how an infectious disease is currently spreading across the population.</p>
+			<p>This tool allows you to analyze user location data to see how an infectious disease might currently be spreading across the population.</p>
 		</div>
 	</div>
 
@@ -69,6 +69,7 @@
 						<div class="panel panel-danger">
 							<div class="panel-heading">Original Infected User</div>
 							<div class="panel-body">
+							    <p>You must enter a valid userid and timestamp pair. You can <a href="plot.html">find one via searching</a>.</p>
 								<div class="input-group input-group-sm">
 									<span class="input-group-addon">User ID</span>
 									<input type="text" class="form-control" placeholder="UserID"
@@ -88,7 +89,7 @@
                             <div class="panel-body">
 		                        <div class="input-group input-group-sm">
 		                            <span class="input-group-addon">Max infection hops</span> <input
-		                                type="text" class="form-control" placeholder="3 people"
+		                                type="text" class="form-control" placeholder="10000"
 		                                name="maxNodeHopsFromOrigin" value="3" required>
 		                        </div>
 		                        <div class="input-group input-group-sm">
@@ -99,7 +100,7 @@
 		                        <div class="input-group input-group-sm">
 		                            <span class="input-group-addon">Incubation Time <small>(hh:mm)</small></span>
 		                            <input type="text" class="form-control" placeholder="HH:mm"
-		                                name="incubationTime" value="00:01" required>
+		                                name="incubationTime" value="00:00" required>
 		                        </div>
                             </div>
                         </div>
@@ -113,9 +114,9 @@
 		                                name="maxResultSize" value="100" required>
 		                        </div>
 		                        <div class="input-group input-group-sm">
-		                            <span class="input-group-addon">Simulation Duration <small>(hh:mm)</small></span>
+		                            <span class="input-group-addon">Analysis Duration <small>(hh:mm)</small></span>
 		                            <input type="text" class="form-control" placeholder="HH:mm"
-		                                name="maxTimeOfInfectionSpreading" value="24:00" required>
+		                                name="maxTimeOfInfectionSpreading" value="00:02" required>
 		                        </div>
                             </div>
                         </div>
@@ -129,6 +130,9 @@
 							<br>
 							<input class="btn btn-default" role="button" type="submit"
 								value="Submit">
+								
+								<div id="wait" style="display: none;">Please wait...this is very slow. It can take about 1 real minute per minute of
+								simulation time, which by default is 1 hour. This message will dissapear when it's finished.</div>
 						</p>
 					</form>
 				</div>

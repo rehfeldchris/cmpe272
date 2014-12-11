@@ -10,7 +10,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.MutableDateTime;
 
-import teamgoat.data.BuzzwordPoweredDataProvider;
+import teamgoat.data.Db2BigSqlDataProvider;
 import teamgoat.data.UserLocationDataProvider;
 import teamgoat.entity.InfectedUserLocationSnapshot;
 import teamgoat.entity.TemporalLocation;
@@ -59,7 +59,6 @@ public class InfectionGraphGenerator {
 		endTime = new DateTime(currentTime).withDurationAdded(this.maxDurationOfInfectionSpreading, 1);
 		infectedUsers.put(origionalInfectedUser.getUser(), origionalInfectedUser);
 		
-		List<InfectedUserLocationSnapshot> users = new ArrayList<>();
 		while (shouldContinueInfectingMoreUsers()) {
 			
 			// Loop over all the currently infected users, finding any new users they infect at this time.
