@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cea1673-7c51-46a3-9771-442e65251962" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\IBM_ADMIN\eclipseworkspace\plague\ideas.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/plot.html" afterPath="$PROJECT_DIR$/WebContent/plot.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/teamgoat/web/api/JobProcessor.java" afterPath="$PROJECT_DIR$/src/teamgoat/web/api/JobProcessor.java" />
     </list>
     <ignored path="plague.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,8 +43,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8598901" vertical-offset="360" max-vertical-offset="1088">
-              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7431319" vertical-offset="360" max-vertical-offset="1088">
+              <caret line="53" column="27" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -343,8 +340,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8598901" vertical-offset="360" max-vertical-offset="1088">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7431319" vertical-offset="360" max-vertical-offset="1088">
+          <caret line="53" column="27" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="31" />
           <folding />
         </state>
       </provider>

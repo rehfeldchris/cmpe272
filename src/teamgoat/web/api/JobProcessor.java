@@ -49,10 +49,13 @@ public class JobProcessor extends HttpServlet {
 		
 		
 		Db2BigSqlDataProvider dataProvider = new Db2BigSqlDataProvider();
-		
-		System.out.println(dataProvider.getUsersTest());
+
 		User user = dataProvider.getUser(originalInfectedUserId);
-		UserLocationSnapshot infectionStartPoint = dataProvider.getLocation(user, getDateTime(request, "startTime"));
+		UserLocationSnapshot infectionStartPoint = null;
+		try {
+			infectionStartPoint = dataProvider.getLocation(user, getDateTime(request, "startTime"));
+		} catch (Exception e) {}
+
 		// If no record was found, try to find a record for the userid at any time we can. This makes using the tool easier.
 		if (infectionStartPoint == null) {
 			infectionStartPoint = dataProvider.getLocationAtArbitraryTime(user);
@@ -76,21 +79,21 @@ public class JobProcessor extends HttpServlet {
 	}
 	
 	private DateTime getDateTime(HttpServletRequest request, String isoDateString) {
-		return DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss").parseDateTime(request.getParameter(isoDateString));
+		return DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss").parseDateTime(request.getParameter(isoDateString).trim());
 	}
 
 	private Integer getParamAsInt(HttpServletRequest request, String requestParameterName) {
 		try {
-			return Integer.parseInt(request.getParameter(requestParameterName));
-		} catch (NumberFormatException e) {
+			return Integer.parseInt(request.getParameter(requestParameterName).trim());
+		} catch (Exception e) {
 			return null;
 		}
 	}
 
 	private Double getParamAsDouble(HttpServletRequest request, String requestParameterName) {
 		try {
-			return Double.parseDouble(request.getParameter(requestParameterName));
-		} catch (NumberFormatException e) {
+			return Double.parseDouble(request.getParameter(requestParameterName).trim());
+		} catch (Exception e) {
 			return null;
 		}
 	}
