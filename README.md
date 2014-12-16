@@ -6,6 +6,13 @@ This tool lets you visualize how an infectious disease would spread through the 
 tune some characteristics about the disease and the simulation, and then it will run a simulation against a
 dataset. Finally, it plots the results on a google map. 
 
+
+##How It Does It
+Microsoft released a dataset, called [GeoLife GPS Trajectories](http://research.microsoft.com/en-us/downloads/b16d359d-d164-469e-9fd4-daa38f2b2e13/), where users agreed to install an app which 
+recorded their locations every few seconds. By using this, it basically lets us know where they were at 
+every second of every day. Then, we can look at the locations of an infected person to see if they came in close proximity to
+another person. If so, we "infect" this other user, and then they too can spread the simulated infection.
+
 ###User Guide
 *More information can be found in the `report.pdf` file.*
 
@@ -44,7 +51,7 @@ After you submit the form and the app finishes computing the results, it present
 location where an infection spread to a new user. It also draws lines between users, which lets you see who infected
 whom. You can also click a marker, to see the userid of whom that marker represents.
 
-####Quick Start for Demo purposes
+####Quick Start
 If you enter userid 55, 66, or 888, the rest of the form fields will be ignored, and precomputed data will be plotted
 on the map instantly. If you want to see the app compute results in real time, you’ll need to enter a real userid and start
 time.  
@@ -54,5 +61,7 @@ time.
 **time:** 2008-11-01T00:42:35  
 **analysis duration:** 00:10  
 
-This was a group project for cmpe 272 at San Jose State University.  
+You can also use Internal Data Exploration Tool to find other userids to enter. This is explained in the report.pdf file.
+
+#####This was a group project for cmpe 272 at San Jose State University.  
 Authors: Amy Chou, Carita Ou, Chris Rehfeld, Liping Sun  
