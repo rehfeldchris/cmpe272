@@ -23,7 +23,7 @@ import teamgoat.entity.UserLocationSnapshot;
 
 public class Db2BigSqlDataProvider implements UserLocationDataProvider {
 	
-	private static final String db = "jdbc:db2://bi-hadoop-prod-499.services.dal.bluemix.net:51000/bigsql";
+	private static final String db = "jdbc:db2://bi-hadoop-prod-052.services.dal.bluemix.net:51000/bigsql";
 	static final String user = "biblumix";
 	static final String pwd = "l~Uox@d9Oy8C";
 	

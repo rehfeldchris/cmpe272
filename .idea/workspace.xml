@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cea1673-7c51-46a3-9771-442e65251962" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\IBM_ADMIN\eclipseworkspace\plague\report.pdf" afterPath="$PROJECT_DIR$/WebContent/report.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/teamgoat/data/Db2BigSqlDataProvider.java" afterPath="$PROJECT_DIR$/src/teamgoat/data/Db2BigSqlDataProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/googlemap.js" afterPath="$PROJECT_DIR$/WebContent/googlemap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/index.html" afterPath="$PROJECT_DIR$/WebContent/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/plot.html" afterPath="$PROJECT_DIR$/WebContent/plot.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/style.css" afterPath="$PROJECT_DIR$/WebContent/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -58,12 +55,12 @@
       <file leaf-file-name="plot.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WebContent/plot.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9283019" vertical-offset="1174" max-vertical-offset="3077">
-              <caret line="98" column="47" selection-start-line="98" selection-start-column="47" selection-end-line="98" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.7056604" vertical-offset="0" max-vertical-offset="3111">
+              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1419199370384" expanded="true" signature="7226:7234" placeholder="..." />
-                <marker date="1419199370384" expanded="true" signature="7226:7237" placeholder="..." />
+                <marker date="1419202286652" expanded="true" signature="7047:7055" placeholder="..." />
+                <marker date="1419202286652" expanded="true" signature="7047:7058" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -72,8 +69,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WebContent/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="689" max-vertical-offset="1292">
-              <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="1241">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -93,8 +90,9 @@
         <option value="$PROJECT_DIR$/WebContent/bootstrap.js" />
         <option value="$PROJECT_DIR$/WebContent/input-field-popovers.js" />
         <option value="$PROJECT_DIR$/WebContent/googlemap.js" />
-        <option value="$PROJECT_DIR$/WebContent/style.css" />
         <option value="$PROJECT_DIR$/WebContent/index.html" />
+        <option value="$PROJECT_DIR$/WebContent/plot-old.html" />
+        <option value="$PROJECT_DIR$/WebContent/style.css" />
         <option value="$PROJECT_DIR$/WebContent/plot.html" />
       </list>
     </option>
@@ -226,7 +224,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1616" height="916" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24045801" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -240,7 +238,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2377892" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2377892" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -343,8 +341,8 @@
           <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1419199370384" expanded="true" signature="7226:7234" placeholder="..." />
-            <marker date="1419199370384" expanded="true" signature="7226:7237" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7055" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7058" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -372,8 +370,8 @@
           <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1419199370384" expanded="true" signature="7226:7234" placeholder="..." />
-            <marker date="1419199370384" expanded="true" signature="7226:7237" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7055" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7058" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -401,8 +399,8 @@
           <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1419199370384" expanded="true" signature="7226:7234" placeholder="..." />
-            <marker date="1419199370384" expanded="true" signature="7226:7237" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7055" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7058" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -472,8 +470,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="689" max-vertical-offset="1292">
-          <caret line="69" column="17" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="1241">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -488,12 +486,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/plot.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9283019" vertical-offset="1174" max-vertical-offset="3077">
-          <caret line="98" column="47" selection-start-line="98" selection-start-column="47" selection-end-line="98" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.7056604" vertical-offset="0" max-vertical-offset="3111">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1419199370384" expanded="true" signature="7226:7234" placeholder="..." />
-            <marker date="1419199370384" expanded="true" signature="7226:7237" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7055" placeholder="..." />
+            <marker date="1419202286652" expanded="true" signature="7047:7058" placeholder="..." />
           </folding>
         </state>
       </provider>
