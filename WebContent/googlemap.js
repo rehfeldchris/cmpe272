@@ -72,7 +72,7 @@ function initialize() {
             {
                 var infowindow = new google.maps.InfoWindow(
                     {
-                        content: '<p>user id: ' + marker.title + '</p>'
+                        content: '<div style="height: 2em">' + marker.title + '</div>'
                     });
                 infowindow.open(map, marker);
             });

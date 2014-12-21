@@ -29,21 +29,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-<style>
-	.custom-popover-data {
-		display: none;
-	}
-	.special-class {
-		max-width: 600px;
-	}
-	.special-class .popover-content {
-		width: 600px;
-	}
-	.note {
-		color: #888;
-	}
-</style>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -70,7 +55,19 @@
 	<!-- jumbotron header -->
 	<div class="jumbotron">
 		<div class="container">
-			<p>This tool allows you to analyze user location data to see how an infectious disease might currently be spreading across the population.</p>
+			<p>This tool allows you to analyze user location data to see how an infectious disease might currently be spreading
+				across the population. We've had ongoing hosting reliability issues, so we hosted a <a href="http://104.167.96.133/plague/">backup</a> elsewhere.</p>
+			<p><a href="#" class="more-toggle">more...</a></p>
+			<div class="more">
+				<p>This tool accesses some sample data of real users who installed apps onto their phones which recorded their
+					gps coordinates every 5 seconds, all day every day. We use this detailed user and location data
+					to visualize hypothetical scenarios of how a disease might spread through the population if one of these users were
+					to become infected with a disease. After you select which user should be used as the person with the disease,
+					along with some other parameters describing the infection, we can calculate who else the disease may have sprewad to,
+					and where the new infections occurred. We plot this on a map.</p>
+				<p></p>
+				<p>You can also read a <a href="report.pdf">detailed report</a>.</p>
+			</div>
 		</div>
 	</div>
 
@@ -100,10 +97,11 @@
 										placeholder="yyyy-MM-ddTHH:mm:ss" name="startTime"
 										value="2008-11-01T03:38:36">
 									<div class="custom-popover-data">
-										The time the user became infected, strictly formatted like <code>2008-11-01T03:38:36</code>.
+										<p>The time the user became infected, strictly formatted like <code>2008-11-01T03:38:36</code>.
 										This is also the time that the
-										user will potentially begin infecting other users. Leave blank to have the
-										system pick an arbitrary time.
+										user will potentially begin infecting other users. </p>
+
+										<p>Leave blank to have the system pick the first known record for this user.</p>
 									</div>
 								</div>
 							</div>
@@ -132,7 +130,10 @@
 		                            <input type="text" class="form-control" placeholder="meters"
 		                                name="minInfectionRangeYards" value="5" required>
 									<div class="custom-popover-data">
-										If another person comes within this many meters of an infected person, they become infected.
+										<p>If another person comes within this many meters of an infected person, they become infected.</p>
+										<p>Let's say you pick a value of 2 meters, and assume Bob is currently infected and contagious.
+										If we have a record that shows Jane and Bob were at the same location at the same time, within less than 2 meters of distance to each other,
+										then Jane will become infected.</p>
 									</div>
 		                        </div>
 		                        <div class="input-group input-group-sm">
@@ -204,15 +205,30 @@
 
 	<hr>
 	<br>
-
-	<div id="map_canvas"></div>
-
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-success">
+					<div class="panel-heading">Results</div>
+					<div class="panel-body">
+						<div id="map_canvas"></div>
+					</div>
+					<div class="panel-heading">Notes</div>
+					<div class="panel-body">
+						<ul>
+							<li>You can click a marker to see which user id it represents</li>
+							<li>A line between 2 markers indicates who infected who</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<br>
 	<hr>
 
 	<footer>
-		<p>&copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld,
-			Liping</p>
+		&copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld, Liping
 	</footer>
 
 
@@ -224,5 +240,21 @@
 	<script src="bootstrap.js"></script>
 	<script src="input-field-popovers.js"></script>
 	<script src="googlemap.js"></script>
+	<script>
+		$(function(){
+			$(".more-toggle").click(function() {
+				var $link = $(this);
+				var $content = $link.parent().next(".more");
+				$content.stop(true);
+				if ($link.text().match(/more/i)) {
+					$link.text("less...");
+					$content.slideDown();
+				} else {
+					$link.text("more...");
+					$content.slideUp();
+				}
+			});
+		});
+	</script>
 </body>
 </html>

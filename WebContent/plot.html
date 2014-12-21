@@ -27,28 +27,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <style>
-        .custom-popover-data {
-            display: none;
-        }
-
-        .special-class {
-            max-width: 600px;
-        }
-
-        .special-class .popover-content {
-            width: 600px;
-        }
-
-        .note {
-            color: #888;
-        }
-
-        #map-canvas {
-            height: 100%
-        }
-    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -73,11 +51,32 @@
 </nav>
 
 <!-- jumbotron header -->
-<div class="jumbotron">
+<div class="top-box">
     <div class="container">
         <p>This tool helps you find data points that exist in our system. It will produce user locations near the time you enter. Then you can use one of these user/timestamp combos
             to enter into the <a href="index.html">infection simulator</a></p>
+
+        <p>One of the difficulties of using this tool is finding a good user and time from which to simulate an
+            infection spreading. Picking a good a starting point is driven by a few considerations:
+        </p>
+
+        <ul>
+            <li>If you want to see the disease actually spread to others, you need to find a user who has data points where
+                they come in close proximity to other users. Because, if a user doesn't come in contact with anyone else, the disease can't spread.</li>
+            <li>The tool computes results very slowly. Unless you like waiting for days for results, you need to restrict the simulation to
+                something short, like 10 minutes. Even then, it might take 30-60 minutes to run.</li>
+            <li>If your simulation will only simulate 10 minutes of real world activity, you need to start the simulation at a prime moment for a given user -
+                it needs to be started right before the user comes in contact with other users.</li>
+        </ul>
+
+        <p>Your best bet to pick a good data point is to pick a user + time that seems to be at the center of
+            the action on the map. Picking a data point in an area with lots of other data points increases your chances
+        of picking a user who will come in contact with others. However, you're not likely to succeed on your first
+            try! It took us many tries to find data points which result in a spread to others.</p>
+
+        <p>You can try altering the timestamp that the below form accepts, but keep the second field on the smaller side.</p>
     </div>
+
 </div>
 
 <div class="container">
@@ -89,23 +88,18 @@
                     <div class="panel panel-danger">
                         <div class="panel-heading">Search For Records</div>
                         <div class="panel-body">
-                            <p>find users records within
-                                +- <input type="text" id="seconds" name="name" value="12000" size=5>
+                            <p>find user records within
+                                +- <input type="text" id="seconds" name="name" value="1200" size=5>
                                 seconds of datetime: <input type="text" id="text" name="name" value="2008-11-15T10:13:36">
                             </p>
 
                             <p><a href="#" class="button"><button>Search</button></a></p>
-
 
                             <div id="wait" style="display: none;">Please wait a moment...searching. Clickable markers will show
                                 up in a moment.
                             </div>
                         </div>
                     </div>
-
-
-
-
 
                 <div id="map-canvas"></div>
             </div>
@@ -114,9 +108,10 @@
     </div>
 </div>
 
+<hr>
+
 <footer>
-    <p>&copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld,
-        Liping</p>
+&copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld, Liping
 </footer>
 
 
@@ -169,7 +164,7 @@
             google.maps.event.addListener(marker, 'click', function () {
                 var infowindow = new google.maps.InfoWindow(
                         {
-                            content: '<div style="height: 100px">' + marker.title + '</div>'
+                            content: '<div style="height: 2em">' + marker.title + '</div>'
                         });
                 infowindow.open(map, marker);
             });

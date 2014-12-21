@@ -149,7 +149,7 @@ public class Db2BigSqlDataProvider implements UserLocationDataProvider {
 	public UserLocationSnapshot getLocationAtArbitraryTime(User user) throws DataAccessException {
 		QueryRunner runner = new QueryRunner();
 		try {
-		    String sql = "select USERID, LATITUDE, LONGITUDE, TIME from bigsql.usertrajectorydata where userid=? fetch first 1 rows only";
+		    String sql = "select USERID, LATITUDE, LONGITUDE, TIME from bigsql.usertrajectorydata where userid=? order by TIME asc fetch first 1 rows only";
 		    Map<String, Object> row = runner.query(
 	    		getConnection(), 
 	    		sql, 

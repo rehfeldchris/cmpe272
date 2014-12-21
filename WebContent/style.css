@@ -38,3 +38,34 @@ hr {
 .jumbotron {
 	margin-top: 40px;
 }
+footer {
+	padding: 1em;
+	color: #555;
+}
+.custom-popover-data {
+	display: none;
+}
+
+.special-class {
+	max-width: 600px;
+}
+
+.special-class .popover-content {
+	width: 600px;
+}
+
+.note {
+	color: #888;
+}
+
+#map-canvas {
+	height: 100%
+}
+.more {
+	display: none;
+}
+.top-box {
+	background-color: #eee;
+	margin-bottom: 2em;
+	padding: 1em;
+}
