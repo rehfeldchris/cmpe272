@@ -33,7 +33,13 @@ public class PlotTest extends HttpServlet {
 		
 		Db2BigSqlDataProvider dataProvider = new Db2BigSqlDataProvider();
 		
-		List<UserLocationSnapshot> results = dataProvider.getUsersWithinTimeRange(dateTime, seconds);
+		List<UserLocationSnapshot> results;
+		
+		try {
+			results = dataProvider.getUsersWithinTimeRange(dateTime, seconds);
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
 		
 		String json = getGson().toJson(new PlotTestResponse(results));
 		response.setContentType("application/javascript");

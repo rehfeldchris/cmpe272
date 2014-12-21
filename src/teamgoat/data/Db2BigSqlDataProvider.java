@@ -245,8 +245,9 @@ public class Db2BigSqlDataProvider implements UserLocationDataProvider {
 	
 	/*****************************************************
 	 * Used for PlotTest
+	 * @throws Exception 
 	 ****************************************************/
-	public List<UserLocationSnapshot> getUsersWithinTimeRange(DateTime dateTime, int seconds) throws DataAccessException {
+	public List<UserLocationSnapshot> getUsersWithinTimeRange(DateTime dateTime, int seconds) throws Exception {
 		QueryRunner runner = new QueryRunner();
 		try {
 
@@ -297,9 +298,9 @@ public class Db2BigSqlDataProvider implements UserLocationDataProvider {
 		    return toUserLocationSnapshots(rows);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 
-		return null;
 	}
 
 }

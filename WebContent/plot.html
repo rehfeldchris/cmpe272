@@ -1,81 +1,181 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <style type="text/css">
-        html { height: 100% }
-        body { height: 100%; margin: 0; padding: 0 }
-        #map-canvas { height: 100% }
-    </style>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plague Tracker Tool</title>
+
+    <!-- Bootstrap >
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+    <!-- own css -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="jquery.js"></script>
+    <script src="input-field-popovers.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    </script>       
-    <script type="text/javascript">
-		jQuery(document).ready(function() {
-		    jQuery(document).on("click", ".button", function(e) {
-		    	$("#wait").slideDown();
-		        e.preventDefault();
-		        var dateTime = $("#text").val();          
-		        var seconds = $("#seconds").val();
-		        initialize(dateTime, seconds);
-		    });
 
-		function initialize(dateTime, seconds) {
-	    	  var latlng = new google.maps.LatLng(40, 116);
-	    	  var mapOptions = {
-	    	    zoom: 9,
-	    	    center: latlng,
-	    	    mapTypeId: google.maps.MapTypeId.ROADMAP
-	    	  }
-	    	  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-	    	  getLocations(dateTime, seconds);
-	    }
-    
-	    function moveToLocation(lat, lng){
-	        var center = new google.maps.LatLng(lat, lng);
-	        // using global variable:
-	        map.panTo(center);
-	    }
-    
-		function getLocations(dateTime, seconds) {
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-			$.getJSON("/plague/PlotTest?dateTime="+dateTime+"&seconds="+seconds, function (data) {
+    <style>
+        .custom-popover-data {
+            display: none;
+        }
 
-				var location;
+        .special-class {
+            max-width: 600px;
+        }
 
-				$.each(data.userLocationSnapshots, function (i, item) {
-					addMarker(item.temporalLocation.lat,item.temporalLocation.lng, item.user.id, item.temporalLocation.timestamp.split(/\./)[0]);
-				});
+        .special-class .popover-content {
+            width: 600px;
+        }
 
-			});
-		}
+        .note {
+            color: #888;
+        }
 
-		function addMarker(lat,lng,userId,ts) {
-				var marker = new google.maps.Marker({
-					position: new google.maps.LatLng(lat,lng),
-					map: map,
-				    title: "userId: " + userId + " timestamp:" + ts
-				});
-	            google.maps.event.addListener(marker, 'click', function()
-                {
-                    var infowindow = new google.maps.InfoWindow(
+        #map-canvas {
+            height: 100%
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Plague Tracker</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse pull-right">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="plot.html">User Data Point Locator</a></li>
+                <li><a href="index.html#map_canvas">Visualizer</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- jumbotron header -->
+<div class="jumbotron">
+    <div class="container">
+        <p>This tool helps you find data points that exist in our system. It will produce user locations near the time you enter. Then you can use one of these user/timestamp combos
+            to enter into the <a href="index.html">infection simulator</a></p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="container">
+
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Search For Records</div>
+                        <div class="panel-body">
+                            <p>find users records within
+                                +- <input type="text" id="seconds" name="name" value="12000" size=5>
+                                seconds of datetime: <input type="text" id="text" name="name" value="2008-11-15T10:13:36">
+                            </p>
+
+                            <p><a href="#" class="button"><button>Search</button></a></p>
+
+
+                            <div id="wait" style="display: none;">Please wait a moment...searching. Clickable markers will show
+                                up in a moment.
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                <div id="map-canvas"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; CMPE272 Group 31: Amy Chou, Carita Ou, Chris Rehfeld,
+        Liping</p>
+</footer>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery(document).on("click", ".button", function (e) {
+            $("#wait").slideDown();
+            e.preventDefault();
+            var dateTime = $("#text").val();
+            var seconds = $("#seconds").val();
+            initialize(dateTime, seconds);
+        });
+
+        function initialize(dateTime, seconds) {
+            var latlng = new google.maps.LatLng(40, 116);
+            var mapOptions = {
+                zoom: 9,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+            getLocations(dateTime, seconds);
+        }
+
+        function moveToLocation(lat, lng) {
+            var center = new google.maps.LatLng(lat, lng);
+            // using global variable:
+            map.panTo(center);
+        }
+
+        function getLocations(dateTime, seconds) {
+
+            $.getJSON("/plague/PlotTest?dateTime=" + dateTime + "&seconds=" + seconds, function (data) {
+
+                var location;
+
+                $.each(data.userLocationSnapshots, function (i, item) {
+                    addMarker(item.temporalLocation.lat, item.temporalLocation.lng, item.user.id, item.temporalLocation.timestamp.split(/\./)[0]);
+                });
+
+            });
+        }
+
+        function addMarker(lat, lng, userId, ts) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map,
+                title: "userId: " + userId + " timestamp:" + ts
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                var infowindow = new google.maps.InfoWindow(
                         {
                             content: '<div style="height: 100px">' + marker.title + '</div>'
                         });
-                    infowindow.open(map, marker);
-                });
-				moveToLocation(lat,lng);
-		}
-		}); 
-	</script>
-</head>
-<body>
-find users records within +- <input type="text" id="seconds" name="name" value="12000" size=5 /> seconds 
- of datetime: <input type="text" id="text" name="name" value="2008-11-15T10:13:36" /> <br><a href="#" class="button"><button>Search</button></a>
-                                <div id="wait" style="display: none;">Please wait a moment...searching. Clickable markers will show up in a moment.</div>
-    <p>This tool helps you find data points that exist in our system. It will produce user locations near the time you enter. Then you can use one of these user/timestamp combos
-    to enter into the <a href="index.html">infection simulator</a></p>
-    
-    <div id="map-canvas"></div>
+                infowindow.open(map, marker);
+            });
+            moveToLocation(lat, lng);
+        }
+    });
+</script>
 </body>
 </html>
