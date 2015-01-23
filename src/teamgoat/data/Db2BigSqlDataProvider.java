@@ -71,7 +71,9 @@ public class Db2BigSqlDataProvider implements UserLocationDataProvider {
 			;
 	
 	
-	
+	public boolean testConnection() {
+		return getConnection() != null;
+	}
 	
 	private Connection getConnection() {
 		if (conn == null) {

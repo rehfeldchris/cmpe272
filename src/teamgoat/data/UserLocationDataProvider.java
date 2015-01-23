@@ -12,4 +12,7 @@ public interface UserLocationDataProvider {
 	public List<UserLocationSnapshot> getUsersWithinRange(TemporalLocation temporalLocation, double maxRangeInMeters) throws DataAccessException;
 	public UserLocationSnapshot getLocation(User user, DateTime instant) throws DataAccessException;
 	public User getUser(int userId) throws DataAccessException;
+	public UserLocationSnapshot getLocationAtArbitraryTime(User user) throws DataAccessException;
+	public List<UserLocationSnapshot> getUsersWithinTimeRange(DateTime dateTime, int seconds) throws Exception;
+	public boolean testConnection();
 }

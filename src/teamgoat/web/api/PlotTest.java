@@ -16,7 +16,10 @@ import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import teamgoat.data.DataProviderFactory;
 import teamgoat.data.Db2BigSqlDataProvider;
+import teamgoat.data.SqliteDataProvider;
+import teamgoat.data.UserLocationDataProvider;
 import teamgoat.entity.UserLocationSnapshot;
 
 @WebServlet(name = "PlotTest", urlPatterns = { "/PlotTest" })
@@ -31,7 +34,8 @@ public class PlotTest extends HttpServlet {
 		DateTime dateTime = getDateTime(request, "dateTime");
 		int seconds = Integer.parseInt(request.getParameter("seconds"));
 		
-		Db2BigSqlDataProvider dataProvider = new Db2BigSqlDataProvider();
+		setup();
+		UserLocationDataProvider dataProvider = DataProviderFactory.singleton();
 		
 		List<UserLocationSnapshot> results;
 		
@@ -57,6 +61,11 @@ public class PlotTest extends HttpServlet {
 			.setPrettyPrinting()
 			.serializeNulls()
 			.create();
+	}
+	
+	private void setup() {
+        String s = getServletContext().getRealPath(".");
+        SqliteDataProvider.cwd = s;
 	}
 	
 }

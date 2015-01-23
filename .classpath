@@ -30,5 +30,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/sqlite-jdbc-3.8.7.jar"/>
+	<classpathentry kind="lib" path="lib/commons-csv-1.1.jar" sourcepath="lib/commons-csv-1.1-src.zip"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

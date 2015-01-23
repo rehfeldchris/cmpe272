@@ -19,7 +19,10 @@ import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import teamgoat.data.DataAccessException;
+import teamgoat.data.DataProviderFactory;
 import teamgoat.data.Db2BigSqlDataProvider;
+import teamgoat.data.SqliteDataProvider;
 import teamgoat.data.UserLocationDataProvider;
 import teamgoat.entity.InfectedUserLocationSnapshot;
 import teamgoat.entity.User;
@@ -47,8 +50,8 @@ public class JobProcessor extends HttpServlet {
 		Duration maxTimeOfInfectionSpreading = getDuration(request.getParameter("maxTimeOfInfectionSpreading"));
 		Duration incubationTime = getDuration(request.getParameter("incubationTime"));
 		
-		
-		Db2BigSqlDataProvider dataProvider = new Db2BigSqlDataProvider();
+		setup();
+		UserLocationDataProvider dataProvider = DataProviderFactory.singleton();
 
 		User user = dataProvider.getUser(originalInfectedUserId);
 		UserLocationSnapshot infectionStartPoint = null;
@@ -108,7 +111,7 @@ public class JobProcessor extends HttpServlet {
 	}
 	
 	private List<InfectedUserLocationSnapshot> getResults(UserLocationSnapshot origionalInfectedUser, Duration maxTimeOfInfectionSpreading, Duration incubationTime, int maxContagionHopsFromOrigin, int maxResultSize, double maximumInfectionRangeInMeters) {
-		UserLocationDataProvider dataProvider = new Db2BigSqlDataProvider();
+		UserLocationDataProvider dataProvider = DataProviderFactory.singleton();
 		
 		InfectionGraphGenerator generator = new InfectionGraphGenerator(
 			dataProvider, 
@@ -124,5 +127,9 @@ public class JobProcessor extends HttpServlet {
 			null
 		));
 	}
-
+	
+	private void setup() {
+        String s = getServletContext().getRealPath(".");
+        SqliteDataProvider.cwd = s;
+	}
 }
