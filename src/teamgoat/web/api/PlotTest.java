@@ -1,6 +1,10 @@
 package teamgoat.web.api;
 
+import java.io.File;
+import java.io.FilePermission;
+import java.io.FileReader;
 import java.io.IOException;
+import java.security.AccessController;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -30,10 +34,11 @@ public class PlotTest extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		DateTime dateTime = getDateTime(request, "dateTime");
 		int seconds = Integer.parseInt(request.getParameter("seconds"));
 		
+
 		setup();
 		UserLocationDataProvider dataProvider = DataProviderFactory.singleton();
 		
@@ -64,8 +69,27 @@ public class PlotTest extends HttpServlet {
 	}
 	
 	private void setup() {
-        String s = getServletContext().getRealPath(".");
+        String s = getServletContext().getRealPath("/");
+		if (s.endsWith("/.") || s.endsWith("\\.")) {
+			s = s.substring(0, s.length() -2);
+		}
         SqliteDataProvider.cwd = s;
+	}
+	
+	
+	public boolean checkFileCanRead(File file){
+	    if (!file.exists()) 
+	        return false;
+	    if (!file.canRead())
+	        return false;
+	    try {
+	        FileReader fileReader = new FileReader(file.getAbsolutePath());
+	        fileReader.read();
+	        fileReader.close();
+	    } catch (Exception e) {
+	        return false;
+	    }
+	    return true;
 	}
 	
 }

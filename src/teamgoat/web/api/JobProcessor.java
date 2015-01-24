@@ -129,7 +129,10 @@ public class JobProcessor extends HttpServlet {
 	}
 	
 	private void setup() {
-        String s = getServletContext().getRealPath(".");
+        String s = getServletContext().getRealPath("/");
+		if (s.endsWith("/.") || s.endsWith("\\.")) {
+			s = s.substring(0, s.length() -2);
+		}
         SqliteDataProvider.cwd = s;
 	}
 }
